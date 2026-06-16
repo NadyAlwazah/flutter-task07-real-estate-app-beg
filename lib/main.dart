@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/auth/presentaion/views/signup_view.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/signup_view.dart';
 
 void main() {
   runApp(const RealEstateApp());
