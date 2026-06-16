@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/utils/widgets/small_screen_view.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/small_screen_view.dart';
 
 class AdaptiveLayout extends StatelessWidget {
   const AdaptiveLayout({super.key, required this.wideScreenView});
