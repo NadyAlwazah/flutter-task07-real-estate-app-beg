@@ -10,7 +10,8 @@ final class AuthInitial extends AuthState {}
 final class AuthLoading extends AuthState {}
 
 final class AuthLoaded extends AuthState {
-  const AuthLoaded();
+  final String role;
+  const AuthLoaded({required this.role});
 }
 
 final class AuthError extends AuthState {

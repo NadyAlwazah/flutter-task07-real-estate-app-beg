@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/user_model.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/services/firestore_services.dart';
 
 abstract class AuthServices {
   Future<bool> registerWithEmailAndPassword(String email, String password);
@@ -12,6 +14,8 @@ class AuthServicesImpl implements AuthServices {
   static final instance = AuthServicesImpl._();
 
   final _firebaseAuth = FirebaseAuth.instance;
+
+  final firestoreServices = FirestoreServices.instance;
 
   @override
   Future<bool> registerWithEmailAndPassword(
@@ -67,5 +71,14 @@ class AuthServicesImpl implements AuthServices {
     } catch (e) {
       throw "Unexpected error: $e";
     }
+  }
+
+  Future<String> getUserRole(String uid) async {
+    final user = await firestoreServices.getDocument<UserModel>(
+      path: "users/$uid",
+      builder: (data, documentId) => UserModel.fromMap(data, documentId),
+    );
+
+    return user.role;
   }
 }

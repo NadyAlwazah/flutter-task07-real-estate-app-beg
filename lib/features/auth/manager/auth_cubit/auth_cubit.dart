@@ -29,7 +29,10 @@ class AuthCubit extends Cubit<AuthState> {
       if (result) {
         _saveUserModel(fullName: fullName, email: email, role: role);
 
-        emit(const AuthLoaded());
+        final uid = authServices.currentUser()!.uid;
+        final roleFromDb = await authServices.getUserRole(uid);
+
+        emit(AuthLoaded(role: roleFromDb));
       } else {
         emit(const AuthError(message: "Register faild"));
       }
@@ -64,10 +67,11 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void checkAuth() {
+  void checkAuth() async {
     final user = authServices.currentUser();
     if (user != null) {
-      emit(const AuthLoaded());
+      final role = await authServices.getUserRole(user.uid);
+      emit(AuthLoaded(role: role));
     } else {
       emit(AuthInitial());
     }
@@ -81,7 +85,10 @@ class AuthCubit extends Cubit<AuthState> {
         password,
       );
       if (result) {
-        emit(const AuthLoaded());
+        final uid = authServices.currentUser()!.uid;
+        final role = await authServices.getUserRole(uid);
+
+        emit(AuthLoaded(role: role));
       } else {
         emit(const AuthError(message: "Login faild"));
       }
