@@ -14,12 +14,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   final firestoreServices = FirestoreServices.instance;
 
-  Future<void> registerWithEmailAndPassword(
-    String email,
-    String password,
-    String fullName,
-    String role,
-  ) async {
+  Future<void> registerWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String fullName,
+    required String role,
+  }) async {
     emit(AuthLoading());
     try {
       final result = await authServices.registerWithEmailAndPassword(
