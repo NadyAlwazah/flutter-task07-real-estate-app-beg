@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117582804845",
+    "project_id": "task07-real-estate-app-beg",
+    "storage_bucket": "task07-real-estate-app-beg.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117582804845:android:67e5f980d5f9041af64c64",
+        "android_client_info": {
+          "package_name": "com.example.flutter_task07_real_estate_app_beg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZeEbJ9d-y6MmqOePVDPr8OUvV0-N1k7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
