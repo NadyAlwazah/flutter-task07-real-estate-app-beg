@@ -28,7 +28,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     passwordController.dispose();
   }
 
-  String selectedRole = "users";
+  String selectedRole = "user";
 
   @override
   Widget build(BuildContext context) {

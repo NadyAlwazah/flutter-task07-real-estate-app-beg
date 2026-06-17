@@ -26,8 +26,8 @@ class RoleDropdown extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
       ),
       dropdownMenuEntries: const [
-        DropdownMenuEntry(value: "users", label: "User"),
-        DropdownMenuEntry(value: "admins", label: "Admin"),
+        DropdownMenuEntry(value: "user", label: "User"),
+        DropdownMenuEntry(value: "admin", label: "Admin"),
       ],
     );
   }
