@@ -13,6 +13,10 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
     fontSize: 17,
   );
+  static const TextStyle authLink = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.primary,
+  );
 
   static const TextStyle authAction = TextStyle(
     color: AppColors.primary,
