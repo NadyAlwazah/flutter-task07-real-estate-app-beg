@@ -13,4 +13,9 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
     fontSize: 17,
   );
+
+  static const TextStyle authAction = TextStyle(
+    color: AppColors.primary,
+    fontWeight: FontWeight.w600,
+  );
 }

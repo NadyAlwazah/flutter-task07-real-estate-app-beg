@@ -6,6 +6,7 @@ import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar
 import 'package:flutter_task07_real_estate_app_beg/features/auth/manager/auth_cubit/auth_cubit.dart';
 
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/have_an_account_widget.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/role_dropdown.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/signup_avatar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/signup_form_fields.dart';
@@ -116,6 +117,9 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                     );
                   },
                 ),
+
+                const SizedBox(height: 32),
+                const HaveAnAccountWidget(),
               ],
             ),
           ),
