@@ -72,4 +72,21 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthInitial());
     }
   }
+
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
+    emit(AuthLoading());
+    try {
+      final result = await authServices.loginWithEmailAndPassword(
+        email,
+        password,
+      );
+      if (result) {
+        emit(const AuthLoaded());
+      } else {
+        emit(const AuthError(message: "Login faild"));
+      }
+    } catch (e) {
+      emit(AuthError(message: e.toString()));
+    }
+  }
 }

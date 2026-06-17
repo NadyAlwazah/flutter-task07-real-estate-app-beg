@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthServices {
   Future<bool> registerWithEmailAndPassword(String email, String password);
+  Future<bool> loginWithEmailAndPassword(String email, String password);
   User? currentUser();
 }
 
@@ -42,5 +43,29 @@ class AuthServicesImpl implements AuthServices {
   @override
   User? currentUser() {
     return _firebaseAuth.currentUser;
+  }
+
+  @override
+  Future<bool> loginWithEmailAndPassword(String email, String password) async {
+    try {
+      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      return userCredential.user != null;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw "No user found for that email.";
+      } else if (e.code == 'wrong-password') {
+        throw "Wrong password provided for that user.";
+      } else if (e.code == 'invalid-email') {
+        throw "The email address is invalid.";
+      } else {
+        throw e.message ?? "Authentication error";
+      }
+    } catch (e) {
+      throw "Unexpected error: $e";
+    }
   }
 }
