@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_button.dart';
 
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/signup_avatar.dart';
@@ -51,6 +52,14 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                   fullNameController: fullNameController,
                   emailController: emailController,
                   passwordController: passwordController,
+                ),
+
+                const SizedBox(height: 16),
+                CustomButton(
+                  text: "Sign Up",
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {}
+                  },
                 ),
               ],
             ),
