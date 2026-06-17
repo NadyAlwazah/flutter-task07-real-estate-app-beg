@@ -5,6 +5,7 @@ import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/vi
 import 'package:flutter_task07_real_estate_app_beg/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const RealEstateApp());
 }
