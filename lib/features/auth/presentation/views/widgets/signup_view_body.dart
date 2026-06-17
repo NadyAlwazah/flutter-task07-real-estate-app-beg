@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_button.dart';
 
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/role_dropdown.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/signup_avatar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/widgets/signup_form_fields.dart';
 
@@ -26,6 +27,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     emailController.dispose();
     passwordController.dispose();
   }
+
+  String selectedRole = "users";
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +55,17 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                   fullNameController: fullNameController,
                   emailController: emailController,
                   passwordController: passwordController,
+                ),
+
+                const SizedBox(height: 12),
+
+                RoleDropdown(
+                  selectedRole: selectedRole,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedRole = value!;
+                    });
+                  },
                 ),
 
                 const SizedBox(height: 16),
