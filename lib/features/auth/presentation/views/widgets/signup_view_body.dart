@@ -47,7 +47,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             child: Column(
               children: [
                 const SizedBox(height: 40),
-                const SignupAvatar(),
+                const AppAvatar(),
 
                 const SizedBox(height: 20),
                 const AuthHeader(
