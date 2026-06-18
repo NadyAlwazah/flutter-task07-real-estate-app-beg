@@ -27,4 +27,18 @@ class FirestoreServices {
     final snapshot = await reference.get();
     return builder(snapshot.data() as Map<String, dynamic>, snapshot.id);
   }
+
+  Future<T?> tryGetDocument<T>({
+    required String path,
+    required T Function(Map<String, dynamic> data, String documentId) builder,
+  }) async {
+    final reference = firestore.doc(path);
+    final snapshot = await reference.get();
+
+    if (!snapshot.exists) {
+      return null;
+    }
+
+    return getDocument<T>(path: path, builder: builder);
+  }
 }

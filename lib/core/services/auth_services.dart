@@ -74,11 +74,22 @@ class AuthServicesImpl implements AuthServices {
   }
 
   Future<String> getUserRole(String uid) async {
-    final user = await firestoreServices.getDocument<UserModel>(
+    // users
+    final user = await firestoreServices.tryGetDocument<UserModel>(
       path: "users/$uid",
-      builder: (data, documentId) => UserModel.fromMap(data, documentId),
+      builder: (data, id) => UserModel.fromMap(data, id),
     );
 
-    return user.role;
+    if (user != null) return user.role;
+
+    // admins
+    final admin = await firestoreServices.tryGetDocument<UserModel>(
+      path: "admins/$uid",
+      builder: (data, id) => UserModel.fromMap(data, id),
+    );
+
+    if (admin != null) return admin.role;
+
+    throw Exception("User role not found");
   }
 }
