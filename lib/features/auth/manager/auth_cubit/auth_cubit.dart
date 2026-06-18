@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+  AuthCubit() : super(AuthLoading());
 
   final authServices = AuthServicesImpl.instance;
 
@@ -67,13 +67,20 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void checkAuth() async {
-    final user = authServices.currentUser();
-    if (user != null) {
+  Future<void> checkAuth() async {
+    try {
+      final user = authServices.currentUser();
+
+      if (user == null) {
+        emit(AuthInitial());
+        return;
+      }
+
       final role = await authServices.getUserRole(user.uid);
+
       emit(AuthLoaded(role: role));
-    } else {
-      emit(AuthInitial());
+    } catch (e) {
+      emit(AuthError(message: e.toString()));
     }
   }
 

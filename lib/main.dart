@@ -9,12 +9,11 @@ import 'package:flutter_task07_real_estate_app_beg/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(
-    BlocProvider(
-      create: (context) => AuthCubit(),
-      child: const RealEstateApp(),
-    ),
-  );
+
+  final authCubit = AuthCubit();
+  authCubit.checkAuth();
+
+  runApp(BlocProvider.value(value: authCubit, child: const RealEstateApp()));
 }
 
 class RealEstateApp extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:flutter_task07_real_estate_app_beg/core/app/auth_gate.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/login_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/signup_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/dashboard_view.dart';
@@ -8,9 +9,12 @@ abstract class AppRouter {
   static const String kDashboard = '/dashboard';
   static const String kUserHome = '/user_home';
   static const String kSignup = '/signup';
+  static const String kLogin = '/login';
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const LoginView()),
+      GoRoute(path: '/', builder: (context, state) => const AuthGate()),
+
+      GoRoute(path: kLogin, builder: (context, state) => const LoginView()),
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
       GoRoute(
         path: kDashboard,
