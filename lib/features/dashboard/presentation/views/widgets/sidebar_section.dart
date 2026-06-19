@@ -44,11 +44,20 @@ class _SidebarSectionState extends State<SidebarSection> {
             const SizedBox(height: 20),
 
             const SidebarSectionTitle("Menu"),
-
             const SizedBox(height: 10),
+
             _buildMenuList(menuItems, 0),
 
             const SizedBox(height: 10),
+
+            const SidebarSectionTitle("Others"),
+            const SizedBox(height: 10),
+
+            _buildMenuList(othersItems, menuItems.length),
+
+            const Spacer(),
+
+            _buildLogout(),
           ],
         ),
       ),
@@ -85,6 +94,17 @@ class _SidebarSectionState extends State<SidebarSection> {
           onTap: () => setState(() => selectedIndex = realIndex),
         );
       }),
+    );
+  }
+
+  Widget _buildLogout() {
+    return ListTile(
+      leading: const Icon(Icons.logout, color: Colors.red),
+      title: const Text(
+        'Log Out',
+        style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+      ),
+      onTap: () {},
     );
   }
 }
