@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_menu_item.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section_title%20.dart';
 
 class SidebarSection extends StatefulWidget {
   const SidebarSection({super.key});
@@ -36,7 +37,15 @@ class _SidebarSectionState extends State<SidebarSection> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [_buildLogo(), const SizedBox(height: 20)],
+          children: [
+            _buildLogo(),
+
+            const SizedBox(height: 20),
+
+            const SidebarSectionTitle("Menu"),
+
+            const SizedBox(height: 10),
+          ],
         ),
       ),
     );
