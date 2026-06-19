@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_item.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_menu_item.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section_title%20.dart';
 
@@ -45,6 +46,9 @@ class _SidebarSectionState extends State<SidebarSection> {
             const SidebarSectionTitle("Menu"),
 
             const SizedBox(height: 10),
+            _buildMenuList(menuItems, 0),
+
+            const SizedBox(height: 10),
           ],
         ),
       ),
@@ -65,6 +69,22 @@ class _SidebarSectionState extends State<SidebarSection> {
           style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
         ),
       ],
+    );
+  }
+
+  Widget _buildMenuList(List<SidebarMenuItem> items, int offset) {
+    return Column(
+      children: List.generate(items.length, (index) {
+        final item = items[index];
+        final realIndex = offset + index;
+
+        return SidebarItem(
+          isActive: selectedIndex == realIndex,
+          icon: item.icon,
+          title: item.title,
+          onTap: () => setState(() => selectedIndex = realIndex),
+        );
+      }),
     );
   }
 }
