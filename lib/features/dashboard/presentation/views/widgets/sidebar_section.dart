@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_item.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_menu_item.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section_title%20.dart';
@@ -67,11 +68,7 @@ class _SidebarSectionState extends State<SidebarSection> {
   Widget _buildLogo() {
     return Row(
       children: [
-        Image.asset(
-          "assets/icons/Copilot_20260619_120224.png",
-          width: 30.w,
-          height: 30.h,
-        ),
+        Image.asset(AssetsData.logo, width: 30.w, height: 30.h),
         const SizedBox(width: 8),
         Text(
           'PropWise',
