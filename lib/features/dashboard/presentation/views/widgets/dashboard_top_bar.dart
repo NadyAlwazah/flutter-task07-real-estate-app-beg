@@ -9,6 +9,7 @@ class DashboardTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       height: 60.h,
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       decoration: BoxDecoration(
@@ -24,7 +25,7 @@ class DashboardTopBar extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: .30.sw,
+            width: .27.sw,
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search anything...',

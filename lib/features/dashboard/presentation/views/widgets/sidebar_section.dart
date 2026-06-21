@@ -33,7 +33,7 @@ class _SidebarSectionState extends State<SidebarSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
+      width: 200.w,
       color: const Color(0xFFFEFEFE),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -96,10 +96,20 @@ class _SidebarSectionState extends State<SidebarSection> {
 
   Widget _buildLogout() {
     return ListTile(
-      leading: const Icon(Icons.logout, color: Colors.red),
+      leading: const Icon(
+        //!!
+        size: 24,
+        Icons.logout,
+        color: Colors.red,
+      ),
       title: const Text(
         'Log Out',
-        style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+        style: TextStyle(
+          //!
+          fontSize: 14,
+          color: Colors.red,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       onTap: () {},
     );
