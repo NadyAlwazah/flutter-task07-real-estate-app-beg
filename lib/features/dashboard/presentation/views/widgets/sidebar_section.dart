@@ -6,8 +6,8 @@ import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentati
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section_title%20.dart';
 
 class SidebarSection extends StatefulWidget {
-  const SidebarSection({super.key});
-
+  const SidebarSection({super.key, required this.onItemSelected});
+  final ValueChanged<int> onItemSelected;
   @override
   State<SidebarSection> createState() => _SidebarSectionState();
 }
@@ -88,7 +88,10 @@ class _SidebarSectionState extends State<SidebarSection> {
           isActive: selectedIndex == realIndex,
           icon: item.icon,
           title: item.title,
-          onTap: () => setState(() => selectedIndex = realIndex),
+          onTap: () => setState(() {
+            selectedIndex = realIndex;
+            widget.onItemSelected(realIndex);
+          }),
         );
       }),
     );

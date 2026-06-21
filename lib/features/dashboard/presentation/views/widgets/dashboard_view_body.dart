@@ -4,26 +4,43 @@ import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentati
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_grid_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section.dart';
 
-class DashboardViewBody extends StatelessWidget {
+class DashboardViewBody extends StatefulWidget {
   const DashboardViewBody({super.key});
 
   @override
+  State<DashboardViewBody> createState() => _DashboardViewBodyState();
+}
+
+class _DashboardViewBodyState extends State<DashboardViewBody> {
+  int selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SidebarSection(),
+        SidebarSection(
+          onItemSelected: (index) {
+            setState(() => selectedIndex = index);
+          },
+        ),
 
-        SizedBox(width: 2),
+        const SizedBox(width: 2),
 
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DashboardTopBar(),
-              SizedBox(height: 20),
-              Padding(padding: EdgeInsets.all(24.0), child: DashboardHeader()),
-              Expanded(child: PropertyGridSection()),
+              const DashboardTopBar(),
+              const SizedBox(height: 20),
+              if (selectedIndex != 1) ...[
+                const Padding(
+                  padding: EdgeInsets.all(24.0),
+                  child: DashboardHeader(),
+                ),
+                const Expanded(child: PropertyGridSection()),
+              ] else ...[
+                const Expanded(child: Center(child: Text("Properties Page"))),
+              ],
             ],
           ),
         ),
