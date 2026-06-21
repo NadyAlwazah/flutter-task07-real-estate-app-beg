@@ -33,15 +33,38 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
             children: [
               const DashboardTopBar(),
               const SizedBox(height: 20),
-              if (selectedIndex != 1) ...[
-                const Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: DashboardHeader(),
+              Expanded(
+                child: IndexedStack(
+                  index: selectedIndex,
+                  children: const [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(24.0),
+                          child: DashboardHeader(),
+                        ),
+                        Expanded(child: PropertyGridSection()),
+                      ],
+                    ),
+
+                    Center(child: Text("Properties Page")),
+
+                    Center(child: Text("Agents Page")),
+
+                    Center(child: Text("Analytics Page")),
+
+                    Center(child: Text("Messages Page")),
+
+                    Center(child: Text("Wishlist Page")),
+
+                    Center(child: Text("Transactions Page")),
+
+                    Center(child: Text("Help Center")),
+
+                    Center(child: Text("Settings")),
+                  ],
                 ),
-                const Expanded(child: PropertyGridSection()),
-              ] else ...[
-                const Expanded(child: Center(child: Text("Properties Page"))),
-              ],
+              ),
             ],
           ),
         ),
