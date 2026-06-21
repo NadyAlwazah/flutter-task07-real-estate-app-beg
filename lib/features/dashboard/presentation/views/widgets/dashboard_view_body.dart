@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/dashboard_header.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/dashboard_top_bar.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_grid_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section.dart';
 
 class DashboardViewBody extends StatelessWidget {
@@ -22,6 +23,7 @@ class DashboardViewBody extends StatelessWidget {
               DashboardTopBar(),
               SizedBox(height: 20),
               Padding(padding: EdgeInsets.all(24.0), child: DashboardHeader()),
+              Expanded(child: PropertyGridSection()),
             ],
           ),
         ),
