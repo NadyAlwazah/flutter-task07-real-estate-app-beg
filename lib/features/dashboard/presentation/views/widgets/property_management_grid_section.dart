@@ -55,7 +55,9 @@ class PropertyManagementGridSection extends StatelessWidget {
                 image: property.imageUrl,
                 //!
                 onEdit: () {},
-                onDelete: () {},
+                onDelete: () {
+                  propertyServices.removeProperty(property.id);
+                },
               );
             },
           );

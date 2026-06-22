@@ -6,6 +6,7 @@ import 'package:flutter_task07_real_estate_app_beg/core/utils/api_paths.dart';
 
 abstract class PropertyServices {
   Stream<List<PropertyModel>> getPropertiesStream();
+  Future<void> removeProperty(String propertyId);
 }
 
 class PropertyServicesImpl implements PropertyServices {
@@ -80,5 +81,10 @@ class PropertyServicesImpl implements PropertyServices {
     });
 
     return controller.stream;
+  }
+
+  @override
+  Future<void> removeProperty(String propertyId) async {
+    await firestoreServices.deleteData(path: ApiPaths.properties(propertyId));
   }
 }

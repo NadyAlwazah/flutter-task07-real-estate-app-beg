@@ -59,4 +59,10 @@ class FirestoreServices {
       return result;
     });
   }
+
+  Future<void> deleteData({required String path}) async {
+    final reference = firestore.doc(path);
+    log('delete: $path');
+    await reference.delete();
+  }
 }
