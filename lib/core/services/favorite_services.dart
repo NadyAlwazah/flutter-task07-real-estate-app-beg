@@ -5,6 +5,7 @@ import 'package:flutter_task07_real_estate_app_beg/core/utils/api_paths.dart';
 
 abstract class FavoriteServices {
   Future<void> addFavoriteProperty(PropertyModel property);
+  Future<void> removeFavoriteProperty(String propertyId);
 }
 
 class FavoriteServicesImp implements FavoriteServices {
@@ -33,5 +34,12 @@ class FavoriteServicesImp implements FavoriteServices {
       path: "$path/${property.id}",
       data: property.toMap(),
     );
+  }
+
+  ///  حذف عقار من المفضلة
+  @override
+  Future<void> removeFavoriteProperty(String propertyId) async {
+    final path = await _getFavoritesPath();
+    await firestoreServices.deleteData(path: "$path/$propertyId");
   }
 }
