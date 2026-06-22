@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/manager/property_favorite_cubit/property_favorite_cubit.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/add_property_bottom_sheet.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/dashboard_view_body.dart';
 
@@ -33,15 +36,18 @@ class _DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE8E8E8),
-      body: DashboardViewBody(
-        onIndexChanged: (index) {
-          setState(() => selectedIndex = index);
-        },
+      body: BlocProvider(
+        create: (context) => PropertyFavoriteCubit(),
+        child: DashboardViewBody(
+          onIndexChanged: (index) {
+            setState(() => selectedIndex = index);
+          },
+        ),
       ),
       floatingActionButton: selectedIndex == 1
           ? FloatingActionButton(
               onPressed: _showAddBottomSheet,
-              backgroundColor: Colors.purple,
+              backgroundColor: AppColors.primary,
               child: const Icon(Icons.add, color: Colors.white),
             )
           : null,

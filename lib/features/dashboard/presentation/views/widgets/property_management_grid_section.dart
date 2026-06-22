@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/property_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'property_card.dart';
 
 class PropertyManagementGridSection extends StatelessWidget {
@@ -20,7 +21,7 @@ class PropertyManagementGridSection extends StatelessWidget {
             return const Center(
               child: CupertinoActivityIndicator(
                 radius: 15,
-                color: Colors.purple,
+                color: AppColors.primary,
               ),
             );
           }

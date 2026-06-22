@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/manager/property_favorite_cubit/property_favorite_cubit.dart';
 
 class PropertyCard extends StatelessWidget {
   final PropertyModel propertyModel;
@@ -16,6 +20,7 @@ class PropertyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final propertyFavoriteCubit = PropertyFavoriteCubit();
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -125,17 +130,63 @@ class PropertyCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      propertyModel.price.toString(),
+                      "\$${propertyModel.price}",
                       style: TextStyle(
-                        color: const Color(0xFF1B4ED8),
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                         fontSize: 13.sp,
                       ),
                     ),
                     const Spacer(),
-                    IconButton(
-                      icon: const Icon(Icons.favorite_border),
-                      onPressed: () {},
+
+                    BlocBuilder<PropertyFavoriteCubit, PropertyFavoriteState>(
+                      bloc: propertyFavoriteCubit,
+                      buildWhen: (previous, current) =>
+                          current is PropertyFavoriteLoading ||
+                          current is PropertyFavoriteSuccess ||
+                          current is PropertyFavoriteError,
+                      builder: (context, state) {
+                        if (state is PropertyFavoriteLoading) {
+                          return const CupertinoActivityIndicator(
+                            color: Colors.red,
+                          );
+                        } else if (state is PropertyFavoriteSuccess) {
+                          return state.isFavorite
+                              ? GestureDetector(
+                                  onTap: () async => await propertyFavoriteCubit
+                                      .toggleFavorite(propertyModel),
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 20.sp,
+                                  ),
+                                )
+                              : GestureDetector(
+                                  onTap: () async => await propertyFavoriteCubit
+                                      .toggleFavorite(propertyModel),
+                                  child: Icon(
+                                    Icons.favorite_border,
+                                    color: AppColors.primary,
+                                    size: 20.sp,
+                                  ),
+                                );
+                        }
+                        return GestureDetector(
+                          onTap: () async => await propertyFavoriteCubit
+                              .toggleFavorite(propertyModel),
+                          child: propertyModel.isFavorite
+                              ? Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                  size: 20.sp,
+                                )
+                              : Icon(
+                                  Icons.favorite_border,
+                                  color: AppColors.primary,
+                                  size: 20.sp,
+                                ),
+                        );
+                      },
                     ),
                   ],
                 ),
