@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/dashboard_header.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/dashboard_top_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_grid_section.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_management_grid_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section.dart';
 
 class DashboardViewBody extends StatefulWidget {
@@ -47,7 +48,8 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                       ],
                     ),
 
-                    Center(child: Text("Properties Page")),
+                    // Center(child: Text("Properties Page")),
+                    PropertyManagementGridSection(),
 
                     Center(child: Text("Agents Page")),
 

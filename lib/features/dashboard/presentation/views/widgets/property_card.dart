@@ -50,7 +50,7 @@ class PropertyCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
-                    child: Image.asset(
+                    child: Image.network(
                       image,
                       width: double.infinity,
                       fit: BoxFit.cover,

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class PropertyModel {
   final String id;
   final String title;
@@ -9,7 +10,7 @@ class PropertyModel {
   final int baths;
   final String area;
   final String imageUrl;
-
+  final bool isFavorite;
   PropertyModel({
     required this.id,
     required this.title,
@@ -21,6 +22,7 @@ class PropertyModel {
     required this.baths,
     required this.area,
     required this.imageUrl,
+    this.isFavorite = false,
   });
 
   factory PropertyModel.fromMap(Map<String, dynamic> data, String documentId) {
@@ -51,5 +53,33 @@ class PropertyModel {
       'area': area,
       'imageUrl': imageUrl,
     };
+  }
+
+  PropertyModel copyWith({
+    String? id,
+    String? title,
+    String? type,
+    String? location,
+    double? price,
+    String? description,
+    int? beds,
+    int? baths,
+    String? area,
+    String? imageUrl,
+    bool? isFavorite,
+  }) {
+    return PropertyModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      location: location ?? this.location,
+      price: price ?? this.price,
+      description: description ?? this.description,
+      beds: beds ?? this.beds,
+      baths: baths ?? this.baths,
+      area: area ?? this.area,
+      imageUrl: imageUrl ?? this.imageUrl,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
   }
 }
