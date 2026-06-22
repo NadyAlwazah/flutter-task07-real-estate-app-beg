@@ -28,4 +28,11 @@ class Validators {
     }
     return null;
   }
+
+  static String? validateField(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Password is required";
+    }
+    return null;
+  }
 }
