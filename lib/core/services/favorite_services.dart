@@ -7,6 +7,7 @@ abstract class FavoriteServices {
   Future<void> addFavoriteProperty(PropertyModel property);
   Future<void> removeFavoriteProperty(String propertyId);
   Stream<List<PropertyModel>> getFavoritePropertiesStream();
+  Future<List<PropertyModel>> fetchFavoriteProperties();
 }
 
 class FavoriteServicesImp implements FavoriteServices {
@@ -50,6 +51,17 @@ class FavoriteServicesImp implements FavoriteServices {
     final path = await _getFavoritesPath();
 
     yield* firestoreServices.collectionStream<PropertyModel>(
+      path: path,
+      builder: (data, id) => PropertyModel.fromMap(data, id),
+    );
+  }
+
+  ///  جلب المفضلة مرة واحدة
+  @override
+  Future<List<PropertyModel>> fetchFavoriteProperties() async {
+    final path = await _getFavoritesPath();
+
+    return await firestoreServices.getCollection<PropertyModel>(
       path: path,
       builder: (data, id) => PropertyModel.fromMap(data, id),
     );
