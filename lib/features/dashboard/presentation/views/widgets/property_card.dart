@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 
 class PropertyCard extends StatelessWidget {
-  final String title;
-  final String location;
-  final int beds;
-  final int baths;
-  final String area;
-  final String price;
-  final String image;
-
+  final PropertyModel propertyModel;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
 
   const PropertyCard({
     super.key,
-    required this.title,
-    required this.location,
-    required this.beds,
-    required this.baths,
-    required this.area,
-    required this.price,
-    required this.image,
     this.onEdit,
     this.onDelete,
+    required this.propertyModel,
   });
 
   @override
@@ -51,7 +39,7 @@ class PropertyCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
                     child: Image.network(
-                      image,
+                      propertyModel.imageUrl,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -92,7 +80,7 @@ class PropertyCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  propertyModel.title,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 14.sp,
@@ -100,7 +88,7 @@ class PropertyCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  location,
+                  propertyModel.location,
                   style: TextStyle(color: Colors.grey[600], fontSize: 12.sp),
                 ),
                 SizedBox(height: 8.h),
@@ -108,7 +96,10 @@ class PropertyCard extends StatelessWidget {
                   children: [
                     Icon(Icons.bed_rounded, size: 16.sp, color: Colors.black87),
                     SizedBox(width: 4.w),
-                    Text('$beds', style: TextStyle(fontSize: 11.sp)),
+                    Text(
+                      '${propertyModel.beds}',
+                      style: TextStyle(fontSize: 11.sp),
+                    ),
                     SizedBox(width: 10.w),
                     Icon(
                       Icons.bathtub_outlined,
@@ -116,7 +107,10 @@ class PropertyCard extends StatelessWidget {
                       color: Colors.black54,
                     ),
                     SizedBox(width: 4.w),
-                    Text('$baths', style: TextStyle(fontSize: 11.sp)),
+                    Text(
+                      '${propertyModel.baths}',
+                      style: TextStyle(fontSize: 11.sp),
+                    ),
                     SizedBox(width: 10.w),
                     Icon(
                       Icons.fullscreen_rounded,
@@ -124,14 +118,14 @@ class PropertyCard extends StatelessWidget {
                       color: Colors.black54,
                     ),
                     SizedBox(width: 4.w),
-                    Text(area, style: TextStyle(fontSize: 11.sp)),
+                    Text(propertyModel.area, style: TextStyle(fontSize: 11.sp)),
                   ],
                 ),
                 SizedBox(height: 8.h),
                 Row(
                   children: [
                     Text(
-                      price,
+                      propertyModel.price.toString(),
                       style: TextStyle(
                         color: const Color(0xFF1B4ED8),
                         fontWeight: FontWeight.bold,

@@ -46,13 +46,7 @@ class PropertyManagementGridSection extends StatelessWidget {
               final property = properties[index];
 
               return PropertyCard(
-                title: property.title,
-                location: property.location,
-                beds: property.beds,
-                baths: property.baths,
-                area: property.area,
-                price: property.price.toString(),
-                image: property.imageUrl,
+                propertyModel: property,
                 //!
                 onEdit: () {},
                 onDelete: () {

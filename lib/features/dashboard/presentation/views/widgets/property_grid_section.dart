@@ -1,64 +1,53 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/services/property_services.dart';
 import 'property_card.dart';
 
 class PropertyGridSection extends StatelessWidget {
   const PropertyGridSection({super.key});
 
-  final List<PropertyCard> propertyCards = const [
-    PropertyCard(
-      title: 'Modern Minimalist',
-      location: 'Sapphire Street, USA',
-      beds: 2,
-      baths: 2,
-      area: '2,500 sqft',
-      price: '\$1,500,000',
-      image: 'assets/images/home_3.png',
-    ),
-    PropertyCard(
-      title: 'Mid-Century Modern',
-      location: 'Sapphire Street, USA',
-      beds: 2,
-      baths: 2,
-      area: '1,200 sqft',
-      price: '\$1,200,000',
-      image: 'assets/images/home_3.png',
-    ),
-    PropertyCard(
-      title: 'Industrial Loft',
-      location: 'Sapphire Street, USA',
-      beds: 2,
-      baths: 2,
-      area: '1,800 sqft',
-      price: '\$950,000',
-      image: 'assets/images/home_3.png',
-    ),
-    PropertyCard(
-      title: 'Scandinavian',
-      location: 'Sapphire Street, USA',
-      beds: 3,
-      baths: 2,
-      area: '2,400 sqft',
-      price: '\$1,900,000',
-      image: 'assets/images/home_3.png',
-    ),
-    // يمكنك إضافة المزيد بسهولة
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final propertyServices = PropertyServicesImpl.instance;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: GridView.builder(
-        itemCount: propertyCards.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 4 : 2,
-          crossAxisSpacing: 20.w,
-          mainAxisSpacing: 20.h,
-          childAspectRatio: 0.80,
-        ),
-        itemBuilder: (context, index) {
-          return propertyCards[index];
+      child: StreamBuilder<List<PropertyModel>>(
+        stream: propertyServices.getPropertiesStream(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CupertinoActivityIndicator(
+                radius: 15,
+                color: Colors.purple,
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text("No properties found"));
+          }
+
+          final properties = snapshot.data!;
+
+          return GridView.builder(
+            itemCount: properties.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 4 : 2,
+              crossAxisSpacing: 20.w,
+              mainAxisSpacing: 20.h,
+              childAspectRatio: 0.80,
+            ),
+            itemBuilder: (context, index) {
+              final property = properties[index];
+
+              return PropertyCard(propertyModel: property);
+            },
+          );
         },
       ),
     );
