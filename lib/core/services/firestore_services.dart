@@ -65,4 +65,20 @@ class FirestoreServices {
     log('delete: $path');
     await reference.delete();
   }
+
+  // One Time Request for a List of documents
+  Future<List<T>> getCollection<T>({
+    required String path,
+    required T Function(Map<String, dynamic> data, String documentId) builder,
+  }) async {
+    Query query = firestore.collection(path);
+    final snapshots = await query.get();
+    final result = snapshots.docs
+        .map(
+          (snapshot) =>
+              builder(snapshot.data() as Map<String, dynamic>, snapshot.id),
+        )
+        .toList();
+    return result;
+  }
 }
