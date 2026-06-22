@@ -1,0 +1,37 @@
+import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/services/auth_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/services/firestore_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/api_paths.dart';
+
+abstract class FavoriteServices {
+  Future<void> addFavoriteProperty(PropertyModel property);
+}
+
+class FavoriteServicesImp implements FavoriteServices {
+  FavoriteServicesImp._();
+  static final instance = FavoriteServicesImp._();
+
+  final firestoreServices = FirestoreServices.instance;
+  final authServices = AuthServicesImpl.instance;
+
+  ///  تحديد مسار المفضلة حسب الدور (User أو Admin)
+  Future<String> _getFavoritesPath() async {
+    final currentUser = authServices.currentUser();
+    final role = await authServices.getUserRole(currentUser!.uid);
+    if (role == "admin") {
+      return ApiPaths.favoritePropertiesAdmin(currentUser.uid);
+    } else {
+      return ApiPaths.favoritePropertiesUser(currentUser.uid);
+    }
+  }
+
+  ///  إضافة عقار للمفضلة
+  @override
+  Future<void> addFavoriteProperty(PropertyModel property) async {
+    final path = await _getFavoritesPath();
+    await firestoreServices.setData(
+      path: "$path/${property.id}",
+      data: property.toMap(),
+    );
+  }
+}
