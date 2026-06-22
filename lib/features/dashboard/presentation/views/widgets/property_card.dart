@@ -10,6 +10,9 @@ class PropertyCard extends StatelessWidget {
   final String price;
   final String image;
 
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+
   const PropertyCard({
     super.key,
     required this.title,
@@ -19,6 +22,8 @@ class PropertyCard extends StatelessWidget {
     required this.area,
     required this.price,
     required this.image,
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
@@ -41,16 +46,45 @@ class PropertyCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(12.r),
-                  bottom: Radius.circular(12.r),
-                ),
-                child: Image.asset(
-                  image,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: Image.asset(
+                      image,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                  if (onEdit != null)
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey.withOpacity(0.1),
+                        child: IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.white),
+                          onPressed: onEdit,
+                          tooltip: "Edit",
+                        ),
+                      ),
+                    ),
+
+                  if (onDelete != null)
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey.withOpacity(0.1),
+                        child: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: onDelete,
+                          tooltip: "Delete",
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
             const SizedBox(height: 8),
@@ -94,7 +128,6 @@ class PropertyCard extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 8.h),
-
                 Row(
                   children: [
                     Text(
