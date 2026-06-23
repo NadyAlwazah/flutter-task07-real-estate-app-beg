@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/image_picker_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar.dart';
@@ -9,24 +10,54 @@ import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentati
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/add_property_image_picker.dart';
 import 'package:go_router/go_router.dart';
 
-class AddPropertyBottomSheet extends StatefulWidget {
-  const AddPropertyBottomSheet({super.key});
+class UpdatePropertyBottomSheet extends StatefulWidget {
+  final PropertyModel property;
+
+  const UpdatePropertyBottomSheet({super.key, required this.property});
 
   @override
-  State<AddPropertyBottomSheet> createState() => _AddPropertyBottomSheetState();
+  State<UpdatePropertyBottomSheet> createState() =>
+      _UpdatePropertyBottomSheetState();
 }
 
-class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
+class _UpdatePropertyBottomSheetState extends State<UpdatePropertyBottomSheet> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController typeController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController bedsController = TextEditingController();
-  final TextEditingController bathsController = TextEditingController();
-  final TextEditingController areaController = TextEditingController();
+  late TextEditingController titleController;
+  late TextEditingController typeController;
+  late TextEditingController locationController;
+  late TextEditingController priceController;
+  late TextEditingController descriptionController;
+  late TextEditingController bedsController;
+  late TextEditingController bathsController;
+  late TextEditingController areaController;
+
+  Uint8List? webImage;
+  bool isUploading = false;
+  final imageService = ImagePickerService.instance;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // تعبئة الحقول بالقيم القديمة
+    titleController = TextEditingController(text: widget.property.title);
+    typeController = TextEditingController(text: widget.property.type);
+    locationController = TextEditingController(text: widget.property.location);
+    priceController = TextEditingController(
+      text: widget.property.price.toString(),
+    );
+    descriptionController = TextEditingController(
+      text: widget.property.description,
+    );
+    bedsController = TextEditingController(
+      text: widget.property.beds.toString(),
+    );
+    bathsController = TextEditingController(
+      text: widget.property.baths.toString(),
+    );
+    areaController = TextEditingController(text: widget.property.area);
+  }
 
   @override
   void dispose() {
@@ -41,10 +72,6 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
     super.dispose();
   }
 
-  Uint8List? webImage;
-  bool isUploading = false;
-  final imageService = ImagePickerService.instance;
-
   Future<void> _pickImage() async {
     final img = await imageService.pickImageFromGallery();
     if (img != null && mounted) {
@@ -55,34 +82,32 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
   Future<void> _submit(BuildContext context) async {
     if (!_formKey.currentState!.validate()) return;
 
-    if (webImage == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar(message: "Please select an image", isError: true),
-      );
-      return;
-    }
-
     setState(() => isUploading = true);
 
-    // 👇 هنا ترفع الصورة مباشرة إلى التخزين (Firebase/Supabase)
+    String imageUrl = widget.property.imageUrl;
 
-    final imageUrl = await imageService.uploadImageBytes(
-      imageBytes: webImage!,
-      bucket: "properties",
-    );
-    if (!context.mounted) return;
-
-    if (imageUrl == null) {
-      setState(() => isUploading = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar(message: "Image upload failed", isError: true),
+    // إذا اختار صورة جديدة → نرفعها
+    if (webImage != null) {
+      final uploadedUrl = await imageService.uploadImageBytes(
+        imageBytes: webImage!,
+        bucket: "properties",
       );
-      return;
+
+      if (uploadedUrl == null) {
+        setState(() => isUploading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          CustomSnackBar(message: "Image upload failed", isError: true),
+        );
+        return;
+      }
+
+      imageUrl = uploadedUrl;
     }
 
     final cubit = context.read<PropertyCubit>();
 
-    await cubit.addProperty(
+    await cubit.updateProperty(
+      id: widget.property.id,
       title: titleController.text.trim(),
       type: typeController.text.trim(),
       location: locationController.text.trim(),
@@ -98,7 +123,7 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
     context.pop();
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(CustomSnackBar(message: "Property added successfully"));
+    ).showSnackBar(CustomSnackBar(message: "Property updated successfully"));
   }
 
   @override
@@ -117,7 +142,7 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Add New Property",
+                "Update Property",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -126,7 +151,11 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
               ),
               const SizedBox(height: 20),
 
-              AddPropertyImagePicker(webImage: webImage, onTap: _pickImage),
+              AddPropertyImagePicker(
+                webImage: webImage,
+                networkImage: widget.property.imageUrl,
+                onTap: _pickImage,
+              ),
               const SizedBox(height: 24),
 
               AddPropertyFormFields(
@@ -141,24 +170,13 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
               ),
               const SizedBox(height: 24),
 
-              BlocConsumer<PropertyCubit, PropertyState>(
-                listenWhen: (previous, current) => current is PropertyError,
-                listener: (context, state) {
-                  if (state is PropertyError) {
-                    context.pop();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      CustomSnackBar(message: state.message, isError: true),
-                    );
-                  }
-                },
-                buildWhen: (previous, current) =>
-                    current is PropertyLoading || current is PropertyError,
+              BlocBuilder<PropertyCubit, PropertyState>(
                 builder: (context, state) {
                   final isLoading = state is PropertyLoading || isUploading;
                   return Center(
                     child: CustomButton(
                       isLoading: isLoading,
-                      text: "Add Property",
+                      text: "Update Property",
                       onPressed: isLoading ? null : () => _submit(context),
                     ),
                   );

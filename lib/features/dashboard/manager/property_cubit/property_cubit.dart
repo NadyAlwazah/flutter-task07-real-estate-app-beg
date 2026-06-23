@@ -54,4 +54,43 @@ class PropertyCubit extends Cubit<PropertyState> {
       return null;
     }
   }
+
+  Future<void> updateProperty({
+    required String id,
+    required String title,
+    required String type,
+    required String location,
+    required double price,
+    required String description,
+    required int beds,
+    required int baths,
+    required String area,
+    required String imageUrl,
+  }) async {
+    emit(PropertyLoading());
+
+    try {
+      final updatedProperty = PropertyModel(
+        id: id,
+        title: title,
+        type: type,
+        location: location,
+        price: price,
+        description: description,
+        beds: beds,
+        baths: baths,
+        area: area,
+        imageUrl: imageUrl,
+      );
+
+      await firestore.setData(
+        path: ApiPaths.properties(id),
+        data: updatedProperty.toMap(),
+      );
+
+      emit(const PropertyUpdated());
+    } catch (e) {
+      emit(PropertyError(message: e.toString()));
+    }
+  }
 }

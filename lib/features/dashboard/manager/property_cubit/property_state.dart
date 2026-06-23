@@ -17,3 +17,7 @@ final class PropertyError extends PropertyState {
   final String message;
   const PropertyError({required this.message});
 }
+
+class PropertyUpdated extends PropertyState {
+  const PropertyUpdated();
+}

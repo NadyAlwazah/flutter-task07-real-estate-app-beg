@@ -4,10 +4,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/property_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/update_property_bottom_sheet.dart';
 import 'property_card.dart';
 
-class PropertyManagementGridSection extends StatelessWidget {
+class PropertyManagementGridSection extends StatefulWidget {
   const PropertyManagementGridSection({super.key});
+
+  @override
+  State<PropertyManagementGridSection> createState() =>
+      _PropertyManagementGridSectionState();
+}
+
+class _PropertyManagementGridSectionState
+    extends State<PropertyManagementGridSection> {
+  void _showAddBottomSheet(PropertyModel propertyModel) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: UpdatePropertyBottomSheet(property: propertyModel),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +75,9 @@ class PropertyManagementGridSection extends StatelessWidget {
               return PropertyCard(
                 propertyModel: property,
                 //!
-                onEdit: () {},
+                onEdit: () {
+                  _showAddBottomSheet(property);
+                },
                 onDelete: () {
                   propertyServices.removeProperty(property.id);
                 },

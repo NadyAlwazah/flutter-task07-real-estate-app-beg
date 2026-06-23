@@ -4,11 +4,25 @@ import 'package:flutter/material.dart';
 class AddPropertyImagePicker extends StatelessWidget {
   final VoidCallback onTap;
   final Uint8List? webImage;
+  final String? networkImage;
 
-  const AddPropertyImagePicker({super.key, required this.onTap, this.webImage});
+  const AddPropertyImagePicker({
+    super.key,
+    required this.onTap,
+    this.webImage,
+    this.networkImage,
+  });
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider? imageProvider;
+
+    if (webImage != null) {
+      imageProvider = MemoryImage(webImage!);
+    } else if (networkImage != null && networkImage!.isNotEmpty) {
+      imageProvider = NetworkImage(networkImage!);
+    }
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -18,14 +32,11 @@ class AddPropertyImagePicker extends StatelessWidget {
           color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey.shade400),
-          image: webImage != null
-              ? DecorationImage(
-                  image: MemoryImage(webImage!),
-                  fit: BoxFit.cover,
-                )
+          image: imageProvider != null
+              ? DecorationImage(image: imageProvider, fit: BoxFit.cover)
               : null,
         ),
-        child: webImage == null
+        child: imageProvider == null
             ? const Center(
                 child: Text(
                   "Tap to upload property image",
