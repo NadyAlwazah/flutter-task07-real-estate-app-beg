@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,10 +44,17 @@ class PropertyCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
-                    child: Image.network(
-                      propertyModel.imageUrl,
+                    child: CachedNetworkImage(
+                      imageUrl: propertyModel.imageUrl,
                       width: double.infinity,
                       fit: BoxFit.cover,
+                      placeholder: (context, url) => const Center(
+                        child: CupertinoActivityIndicator(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Center(child: Icon(Icons.error)),
                     ),
                   ),
 
