@@ -52,8 +52,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
 
                 const SizedBox(height: 20),
                 const AuthHeader(
-                  title: "Create Account",
-                  subtitle: "Sign up to continue using the app",
+                  title: "Get Started",
+                  subtitle: "Create an account to continue",
                 ),
 
                 const SizedBox(height: 16),

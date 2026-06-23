@@ -46,8 +46,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
                 const SizedBox(height: 20),
                 const AuthHeader(
-                  title: "Login Account",
-                  subtitle: "Login to continue using the app",
+                  title: "Welcome Back",
+                  subtitle: "Sign in to access your account",
                 ),
                 const SizedBox(height: 16),
                 LoginFormFields(
