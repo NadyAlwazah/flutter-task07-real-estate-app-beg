@@ -4,6 +4,7 @@ import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentati
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_grid_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_management_grid_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/user_role_management_section.dart';
 
 class DashboardViewBody extends StatefulWidget {
   const DashboardViewBody({super.key, required this.onIndexChanged});
@@ -48,10 +49,9 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                       ],
                     ),
 
-                    // Center(child: Text("Properties Page")),
                     PropertyManagementGridSection(),
 
-                    Center(child: Text("Agents Page")),
+                    UserRoleManagementSection(),
 
                     Center(child: Text("Analytics Page")),
 

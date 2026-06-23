@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/user_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/firestore_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/api_paths.dart';
 
 abstract class AuthServices {
   Future<bool> registerWithEmailAndPassword(String email, String password);
@@ -91,5 +92,50 @@ class AuthServicesImpl implements AuthServices {
     if (admin != null) return admin.role;
 
     throw Exception("User role not found");
+  }
+
+  Future<List<Map<String, dynamic>>> getAllAccounts() async {
+    // جلب users
+    final users = await firestoreServices.getCollection(
+      path: ApiPaths.users(),
+      builder: (data, id) => {
+        "uid": id,
+        "email": data["email"],
+        "role": "user",
+        "collection": "users",
+      },
+    );
+
+    // جلب admins
+    final admins = await firestoreServices.getCollection(
+      path: ApiPaths.admins(),
+      builder: (data, id) => {
+        "uid": id,
+        "email": data["email"],
+        "role": "admin",
+        "collection": "admins",
+      },
+    );
+
+    return [...users, ...admins];
+  }
+
+  Future<void> updateAccountRole(
+    String uid,
+    String currentRole,
+    String newRole,
+    String email,
+  ) async {
+    final oldCollection = currentRole == "admin" ? "admins" : "users";
+    final newCollection = newRole == "admin" ? "admins" : "users";
+
+    // 1) حذف من المجموعة القديمة
+    await firestoreServices.deleteData(path: "$oldCollection/$uid");
+
+    // 2) إضافة إلى المجموعة الجديدة
+    await firestoreServices.setData(
+      path: "$newCollection/$uid",
+      data: {"email": email, "role": newRole},
+    );
   }
 }
