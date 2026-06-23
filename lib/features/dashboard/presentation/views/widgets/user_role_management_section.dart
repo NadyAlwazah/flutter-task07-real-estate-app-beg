@@ -86,6 +86,8 @@ class _UserRoleManagementSectionState extends State<UserRoleManagementSection> {
                             itemCount: users.length,
                             itemBuilder: (context, index) {
                               return RoleManagementCard(
+                                onDelete: auth.deleteAccount,
+
                                 user: users[index],
                                 onUpdate: auth.updateAccountRole,
                                 onRefresh: _refresh,
@@ -132,6 +134,7 @@ class _UserRoleManagementSectionState extends State<UserRoleManagementSection> {
                             itemCount: admins.length,
                             itemBuilder: (context, index) {
                               return RoleManagementCard(
+                                onDelete: auth.deleteAccount,
                                 user: admins[index],
                                 onUpdate: auth.updateAccountRole,
                                 onRefresh: _refresh,

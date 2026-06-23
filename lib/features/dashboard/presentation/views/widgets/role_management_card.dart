@@ -12,12 +12,15 @@ class RoleManagementCard extends StatelessWidget {
     String email,
   )
   onUpdate;
+
+  final Future<void> Function(String uid) onDelete;
   final VoidCallback onRefresh;
 
   const RoleManagementCard({
     super.key,
     required this.user,
     required this.onUpdate,
+    required this.onDelete, // 👈 إضافة
     required this.onRefresh,
   });
 
@@ -56,7 +59,6 @@ class RoleManagementCard extends StatelessWidget {
                       fontSize: 12.sp,
                     ),
                   ),
-
                   SizedBox(height: 4.h),
                   Text(
                     user["email"],
@@ -69,6 +71,7 @@ class RoleManagementCard extends StatelessWidget {
               ),
             ),
 
+            // 🔥 Dropdown
             RoleDropdown(
               currentRole: user["role"],
               email: user["email"],
@@ -76,9 +79,46 @@ class RoleManagementCard extends StatelessWidget {
               onUpdate: onUpdate,
               onRefresh: onRefresh,
             ),
+
+            SizedBox(width: 10.w),
+
+            //  زر الحذف
+            IconButton(
+              icon: Icon(Icons.delete, color: Colors.red, size: 20.sp),
+              onPressed: () {
+                _showDeleteDialog(context);
+              },
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  //
+  void _showDeleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Delete User"),
+          content: Text("Are you sure you want to delete ${user["fullName"]}?"),
+          actions: [
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: const Text("Delete", style: TextStyle(color: Colors.red)),
+              onPressed: () async {
+                Navigator.pop(context);
+                await onDelete(user["uid"]);
+                onRefresh();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

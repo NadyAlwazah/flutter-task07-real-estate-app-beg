@@ -140,4 +140,18 @@ class AuthServicesImpl implements AuthServices {
       data: {"email": email, "role": newRole},
     );
   }
+
+  Future<void> deleteAccount(String uid) async {
+    try {
+      await FirestoreServices.instance
+          .deleteData(path: ApiPaths.user(uid))
+          .catchError((_) async {
+            await FirestoreServices.instance.deleteData(
+              path: ApiPaths.admin(uid),
+            );
+          });
+    } catch (e) {
+      throw Exception("Failed to delete account: $e");
+    }
+  }
 }
