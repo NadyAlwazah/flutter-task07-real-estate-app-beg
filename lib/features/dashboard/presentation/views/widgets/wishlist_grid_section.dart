@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/favorite_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_card.dart';
 
 class WishlistGridSection extends StatelessWidget {
@@ -16,7 +18,12 @@ class WishlistGridSection extends StatelessWidget {
 
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CupertinoActivityIndicator(
+              radius: 15,
+              color: AppColors.primary,
+            ),
+          );
         }
 
         final wishlist = snapshot.data!;
