@@ -41,7 +41,7 @@ class WishlistGridSection extends StatelessWidget {
           itemCount: wishlist.length,
           itemBuilder: (context, index) {
             final property = wishlist[index];
-            return PropertyCard(propertyModel: property);
+            return PropertyCard(propertyModel: property, forceFavorite: true);
           },
         );
       },

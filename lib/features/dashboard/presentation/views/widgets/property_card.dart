@@ -11,12 +11,14 @@ class PropertyCard extends StatelessWidget {
   final PropertyModel propertyModel;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final bool forceFavorite;
 
   const PropertyCard({
     super.key,
     this.onEdit,
     this.onDelete,
     required this.propertyModel,
+    this.forceFavorite = false,
   });
 
   @override
@@ -182,7 +184,13 @@ class PropertyCard extends StatelessWidget {
                         return GestureDetector(
                           onTap: () async => await propertyFavoriteCubit
                               .toggleFavorite(propertyModel),
-                          child: propertyModel.isFavorite
+                          child: forceFavorite
+                              ? Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                  size: 20.sp,
+                                )
+                              : propertyModel.isFavorite
                               ? Icon(
                                   Icons.favorite,
                                   color: Colors.red,
