@@ -50,15 +50,16 @@ class RoleManagementCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    user["email"],
+                    user["fullName"].toString(),
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 12.sp,
                     ),
                   ),
+
                   SizedBox(height: 4.h),
                   Text(
-                    "Current Role: ${user["role"]}",
+                    user["email"],
                     style: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: 10.sp,

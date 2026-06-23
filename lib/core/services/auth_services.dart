@@ -103,6 +103,7 @@ class AuthServicesImpl implements AuthServices {
         "email": data["email"],
         "role": "user",
         "collection": "users",
+        "fullName": data["fullName"],
       },
     );
 
@@ -114,6 +115,7 @@ class AuthServicesImpl implements AuthServices {
         "email": data["email"],
         "role": "admin",
         "collection": "admins",
+        "fullName": data["fullName"],
       },
     );
 
