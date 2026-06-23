@@ -5,6 +5,7 @@ import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentati
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_management_grid_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/user_role_management_section.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/wishlist_grid_section.dart';
 
 class DashboardViewBody extends StatefulWidget {
   const DashboardViewBody({super.key, required this.onIndexChanged});
@@ -57,7 +58,7 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
 
                     Center(child: Text("Messages Page")),
 
-                    Center(child: Text("Wishlist Page")),
+                    WishlistGridSection(),
 
                     Center(child: Text("Transactions Page")),
 
