@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/property_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_card.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_card.dart';
 
-class PropertyGridSection extends StatelessWidget {
-  const PropertyGridSection({super.key});
+class UserPropertyGridSection extends StatelessWidget {
+  const UserPropertyGridSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +40,12 @@ class PropertyGridSection extends StatelessWidget {
               crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 4 : 2,
               crossAxisSpacing: 20.w,
               mainAxisSpacing: 20.h,
-              childAspectRatio: 0.80,
+              childAspectRatio: 1.1,
             ),
             itemBuilder: (context, index) {
               final property = properties[index];
 
-              return PropertyCard(propertyModel: property);
+              return UserPropertyCard(propertyModel: property);
             },
           );
         },

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/favorite_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_card.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_card.dart';
 
 class FavorityProperties extends StatelessWidget {
   const FavorityProperties({super.key});
@@ -43,12 +43,15 @@ class FavorityProperties extends StatelessWidget {
             crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 4 : 2,
             crossAxisSpacing: 20.w,
             mainAxisSpacing: 20.h,
-            childAspectRatio: 0.80,
+            childAspectRatio: 1.1,
           ),
           itemCount: wishlist.length,
           itemBuilder: (context, index) {
             final property = wishlist[index];
-            return PropertyCard(propertyModel: property, forceFavorite: true);
+            return UserPropertyCard(
+              propertyModel: property,
+              forceFavorite: true,
+            );
           },
         );
       },
