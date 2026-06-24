@@ -7,6 +7,7 @@ abstract class AuthServices {
   Future<bool> registerWithEmailAndPassword(String email, String password);
   Future<bool> loginWithEmailAndPassword(String email, String password);
   User? currentUser();
+  Future<void> signOut();
 }
 
 class AuthServicesImpl implements AuthServices {
@@ -153,5 +154,10 @@ class AuthServicesImpl implements AuthServices {
     } catch (e) {
       throw Exception("Failed to delete account: $e");
     }
+  }
+
+  @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
   }
 }

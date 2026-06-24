@@ -103,4 +103,15 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthError(message: e.toString()));
     }
   }
+
+  Future<void> signOut() async {
+    emit(const AuthSigningOut());
+    try {
+      await authServices.signOut();
+
+      emit(const AuthSignedOut());
+    } catch (e) {
+      emit(AuthSignOutError(e.toString()));
+    }
+  }
 }

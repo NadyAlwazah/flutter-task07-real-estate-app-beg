@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/auth/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_item.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_menu_item.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_section_title%20.dart';
@@ -58,7 +61,30 @@ class _SidebarSectionState extends State<SidebarSection> {
 
             const Spacer(),
 
-            _buildLogout(),
+            BlocListener<AuthCubit, AuthState>(
+              listenWhen: (previous, current) => current is AuthSignOutError,
+              listener: (context, state) {
+                if (state is AuthSignOutError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    CustomSnackBar(message: state.message, isError: true),
+                  );
+                }
+              },
+              child: ListTile(
+                leading: Icon(size: 20.sp, Icons.logout, color: Colors.red),
+                title: Text(
+                  'Log Out',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onTap: () async {
+                  context.read<AuthCubit>().signOut();
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -94,27 +120,6 @@ class _SidebarSectionState extends State<SidebarSection> {
           }),
         );
       }),
-    );
-  }
-
-  Widget _buildLogout() {
-    return ListTile(
-      leading: const Icon(
-        //!!
-        size: 24,
-        Icons.logout,
-        color: Colors.red,
-      ),
-      title: const Text(
-        'Log Out',
-        style: TextStyle(
-          //!
-          fontSize: 14,
-          color: Colors.red,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      onTap: () {},
     );
   }
 }

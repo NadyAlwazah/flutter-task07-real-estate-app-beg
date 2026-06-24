@@ -14,7 +14,7 @@ class AuthGate extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        if (state is AuthLoading) {
+        if (state is AuthLoading || state is AuthSigningOut) {
           return const Scaffold(
             body: Center(
               child: CupertinoActivityIndicator(
@@ -26,14 +26,14 @@ class AuthGate extends StatelessWidget {
         }
 
         if (state is AuthLoaded) {
-          if (state.role == 'user') {
-            return const UserHomeView();
-          }
-
-          return const DashboardView();
+          return state.role == 'user'
+              ? const UserHomeView()
+              : const DashboardView();
         }
 
-        if (state is AuthInitial) {
+        if (state is AuthInitial ||
+            state is AuthSignedOut ||
+            state is AuthSignOutError) {
           return const LoginView();
         }
 
