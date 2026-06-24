@@ -5,9 +5,15 @@ import 'package:flutter_task07_real_estate_app_beg/core/services/property_servic
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_card.dart';
 
-class UserPropertyGridSection extends StatelessWidget {
-  const UserPropertyGridSection({super.key});
+class UserPropertyGridSection extends StatefulWidget {
+  const UserPropertyGridSection({super.key, required this.onPropertySelected});
+  final Function(PropertyModel) onPropertySelected;
+  @override
+  State<UserPropertyGridSection> createState() =>
+      _UserPropertyGridSectionState();
+}
 
+class _UserPropertyGridSectionState extends State<UserPropertyGridSection> {
   @override
   Widget build(BuildContext context) {
     final propertyServices = PropertyServicesImpl.instance;
@@ -45,7 +51,10 @@ class UserPropertyGridSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final property = properties[index];
 
-              return UserPropertyCard(propertyModel: property);
+              return UserPropertyCard(
+                propertyModel: property,
+                onTap: () => widget.onPropertySelected(property),
+              );
             },
           );
         },

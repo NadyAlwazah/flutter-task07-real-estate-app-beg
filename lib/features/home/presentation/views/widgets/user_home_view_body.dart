@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/favority_properties.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/home_top_bar.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/property_details_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/sidebar_user_section.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_grid_section.dart';
 
@@ -13,6 +15,8 @@ class UserHomeViewBody extends StatefulWidget {
 
 class _UserHomeViewBodyState extends State<UserHomeViewBody> {
   int selectedIndex = 0;
+  PropertyModel? selectedProperty;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,16 +38,31 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
               Expanded(
                 child: IndexedStack(
                   index: selectedIndex,
-                  children: const [
-                    UserPropertyGridSection(),
+                  children: [
+                    selectedProperty == null
+                        ? UserPropertyGridSection(
+                            onPropertySelected: (property) {
+                              setState(() {
+                                selectedProperty = property;
+                              });
+                            },
+                          )
+                        : PropertyDetailsView(
+                            property: selectedProperty!,
+                            onBack: () {
+                              setState(() {
+                                selectedProperty = null; // نرجع للـ Grid
+                              });
+                            },
+                          ),
 
-                    FavorityProperties(),
+                    const FavorityProperties(),
 
-                    Center(child: Text("Profile")),
+                    const Center(child: Text("Profile")),
 
-                    Center(child: Text("Help Center")),
+                    const Center(child: Text("Help Center")),
 
-                    Center(child: Text("Settings")),
+                    const Center(child: Text("Settings")),
                   ],
                 ),
               ),
