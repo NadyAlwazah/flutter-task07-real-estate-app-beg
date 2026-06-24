@@ -13,48 +13,50 @@ class FavorityProperties extends StatelessWidget {
   Widget build(BuildContext context) {
     final favoriteServices = FavoriteServicesImp.instance;
 
-    return StreamBuilder<List<PropertyModel>>(
-      stream: favoriteServices.getFavoritePropertiesUserStream(),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      child: StreamBuilder<List<PropertyModel>>(
+        stream: favoriteServices.getFavoritePropertiesUserStream(),
 
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Center(
-            child: CupertinoActivityIndicator(
-              radius: 15,
-              color: AppColors.primary,
-            ),
-          );
-        }
-
-        final wishlist = snapshot.data!;
-
-        if (wishlist.isEmpty) {
-          return const Center(
-            child: Text(
-              "No favorite properties yet",
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-          );
-        }
-
-        return GridView.builder(
-          padding: EdgeInsets.all(20.w),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 4 : 2,
-            crossAxisSpacing: 20.w,
-            mainAxisSpacing: 20.h,
-            childAspectRatio: 1.1,
-          ),
-          itemCount: wishlist.length,
-          itemBuilder: (context, index) {
-            final property = wishlist[index];
-            return UserPropertyCard(
-              propertyModel: property,
-              forceFavorite: true,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CupertinoActivityIndicator(
+                radius: 15,
+                color: AppColors.primary,
+              ),
             );
-          },
-        );
-      },
+          }
+
+          final wishlist = snapshot.data!;
+
+          if (wishlist.isEmpty) {
+            return const Center(
+              child: Text(
+                "No favorite properties yet",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            );
+          }
+
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: MediaQuery.of(context).size.width > 1000 ? 4 : 2,
+              crossAxisSpacing: 20.w,
+              mainAxisSpacing: 20.h,
+              childAspectRatio: 1.1,
+            ),
+            itemCount: wishlist.length,
+            itemBuilder: (context, index) {
+              final property = wishlist[index];
+              return UserPropertyCard(
+                propertyModel: property,
+                forceFavorite: true,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
