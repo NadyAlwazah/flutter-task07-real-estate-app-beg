@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/property_grid_section.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/favority_properties.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/home_top_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/sidebar_user_section.dart';
 
@@ -36,7 +37,7 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
                   children: const [
                     PropertyGridSection(),
 
-                    Center(child: Text("Favorite")),
+                    FavorityProperties(),
 
                     Center(child: Text("Profile")),
 

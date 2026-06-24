@@ -9,6 +9,7 @@ abstract class FavoriteServices {
   Stream<List<PropertyModel>> getFavoritePropertiesStream();
   Future<List<PropertyModel>> fetchFavoriteProperties();
   Stream<List<PropertyModel>> getFavoritePropertiesAdminStream();
+  Stream<List<PropertyModel>> getFavoritePropertiesUserStream();
 }
 
 class FavoriteServicesImp implements FavoriteServices {
@@ -75,6 +76,17 @@ class FavoriteServicesImp implements FavoriteServices {
 
     return firestoreServices.collectionStream<PropertyModel>(
       path: ApiPaths.favoritePropertiesAdmin(uid),
+      builder: (data, id) => PropertyModel.fromMap(data, id),
+    );
+  }
+
+  @override
+  Stream<List<PropertyModel>> getFavoritePropertiesUserStream() {
+    final currentUser = authServices.currentUser();
+    final uid = currentUser!.uid;
+
+    return firestoreServices.collectionStream<PropertyModel>(
+      path: ApiPaths.favoritePropertiesUser(uid),
       builder: (data, id) => PropertyModel.fromMap(data, id),
     );
   }
