@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/services/auth_services.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/services/top_bar_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/user_model.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/services/profile_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
 
 class DashboardTopBar extends StatelessWidget {
@@ -10,15 +10,19 @@ class DashboardTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uid = AuthServicesImpl.instance.currentUser()!.uid;
-    final dashboardTopBarServices = TopBarServices.instance;
-    return FutureBuilder<Map<String, dynamic>>(
-      future: dashboardTopBarServices.getAdminData(uid),
+    final profileServices = ProfileServicesImp.instance;
+
+    return FutureBuilder<UserModel>(
+      future: profileServices.fetchAdminData(),
       builder: (context, snapshot) {
         String fullName = "Loading...";
 
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          fullName = snapshot.data!["fullName"] ?? "Admin";
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          fullName = "Loading...";
+        } else if (snapshot.hasError) {
+          fullName = "Error";
+        } else if (snapshot.hasData) {
+          fullName = snapshot.data!.fullName;
         }
 
         return Container(
@@ -75,7 +79,6 @@ class DashboardTopBar extends StatelessWidget {
                       color: Colors.black87,
                     ),
                   ),
-
                   SizedBox(width: 8.w),
                   CircleAvatar(
                     radius: 18.r,

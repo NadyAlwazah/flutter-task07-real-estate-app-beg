@@ -4,6 +4,7 @@ import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/vi
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/home_top_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/property_details_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/sidebar_user_section.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_profile_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_grid_section.dart';
 
 class UserHomeViewBody extends StatefulWidget {
@@ -58,8 +59,7 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
 
                     const FavorityProperties(),
 
-                    const Center(child: Text("Profile")),
-
+                    UserProfileView(),
                     const Center(child: Text("Help Center")),
 
                     const Center(child: Text("Settings")),
