@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 
 class SidebarItem extends StatelessWidget {
   final bool isActive;
@@ -25,7 +26,7 @@ class SidebarItem extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
           decoration: BoxDecoration(
-            color: isActive ? const Color(0xFF1B4ED8) : Colors.transparent,
+            color: isActive ? AppColors.blue : Colors.transparent,
             borderRadius: BorderRadius.circular(8.r),
           ),
           child: Row(

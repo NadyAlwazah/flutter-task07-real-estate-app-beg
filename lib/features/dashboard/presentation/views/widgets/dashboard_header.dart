@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 
 class DashboardHeader extends StatefulWidget {
   const DashboardHeader({super.key});
@@ -54,9 +55,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                         tab,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: isActive
-                              ? const Color(0xFF1B4ED8)
-                              : Colors.black87,
+                          color: isActive ? AppColors.blue : Colors.black87,
                         ),
                       ),
                       SizedBox(height: 4.h),
@@ -64,9 +63,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                         duration: const Duration(milliseconds: 200),
                         height: 2.h,
                         width: isActive ? (tab.length * 5).w : 0,
-                        color: isActive
-                            ? const Color(0xFF1B4ED8)
-                            : Colors.transparent,
+                        color: isActive ? AppColors.blue : Colors.transparent,
                       ),
                     ],
                   ),
@@ -179,6 +176,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
   Widget _buildFilterButton() {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
+        fixedSize: const Size(100, 45),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(10),
         ),
@@ -192,7 +190,8 @@ class _DashboardHeaderState extends State<DashboardHeader> {
   Widget _buildSearchButton() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF1B4ED8),
+        fixedSize: const Size(100, 45),
+        backgroundColor: AppColors.blue,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       ),
