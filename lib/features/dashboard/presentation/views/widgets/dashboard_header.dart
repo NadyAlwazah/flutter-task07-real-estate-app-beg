@@ -39,7 +39,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ✅ Tabs
+          // Tabs
           Row(
             children: tabs.map((tab) {
               final isActive = selectedTab == tab;
@@ -77,7 +77,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
 
           SizedBox(height: 20.h),
 
-          // ✅ Dropdowns + Buttons
+          //  Dropdowns + Buttons
           Row(
             children: [
               Expanded(
@@ -133,57 +133,41 @@ class _DashboardHeaderState extends State<DashboardHeader> {
     String? selectedValue,
     ValueChanged<String?> onChanged,
   ) {
-    // تحديد الأيقونة حسب نوع القائمة
-    IconData icon;
-    double width;
-
-    switch (label) {
-      case 'Location':
-        icon = Icons.location_on_outlined;
-        width = 170.w;
-        break;
-      case 'Price':
-        icon = Icons.attach_money;
-        width = 130.w;
-        break;
-      case 'Beds':
-        icon = Icons.bed_outlined;
-        width = 130.w;
-        break;
-      case 'Baths':
-        icon = Icons.bathtub_outlined;
-        width = 130.w;
-        break;
-      default:
-        icon = Icons.arrow_drop_down;
-        width = 130.w;
-    }
+    // أيقونات لكل dropdown
+    final icons = {
+      'Location': Icons.location_on_outlined,
+      'Price': Icons.attach_money,
+      'Beds': Icons.bed_outlined,
+      'Baths': Icons.bathtub_outlined,
+    };
 
     return SizedBox(
-      width: width,
+      width: 185,
       child: Container(
         height: 40.h,
-
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: DropdownMenu<String>(
-          width: width,
+          trailingIcon: const Icon(
+            Icons.keyboard_arrow_down_outlined,
+            size: 18,
+          ),
           inputDecorationTheme: const InputDecorationTheme(
             border: InputBorder.none,
             contentPadding: EdgeInsets.zero,
             isDense: true,
           ),
-
           initialSelection: selectedValue,
           onSelected: onChanged,
-
           hintText: label,
-          textStyle: TextStyle(fontSize: 10.sp),
-          leadingIcon: Icon(icon, size: 18.sp, color: Colors.grey),
-
+          textStyle: const TextStyle(fontSize: 12),
+          leadingIcon: Icon(
+            icons[label] ?? Icons.arrow_drop_down,
+            color: Colors.grey,
+          ),
           dropdownMenuEntries: items
               .map((e) => DropdownMenuEntry(value: e, label: e))
               .toList(),
