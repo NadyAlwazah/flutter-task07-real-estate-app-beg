@@ -5,20 +5,20 @@ import 'package:flutter_task07_real_estate_app_beg/core/services/auth_services.d
 import 'package:flutter_task07_real_estate_app_beg/core/services/top_bar_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
 
-class DashboardTopBar extends StatelessWidget {
-  const DashboardTopBar({super.key});
+class HomeTopBar extends StatelessWidget {
+  const HomeTopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     final uid = AuthServicesImpl.instance.currentUser()!.uid;
     final dashboardTopBarServices = TopBarServices.instance;
     return FutureBuilder<Map<String, dynamic>>(
-      future: dashboardTopBarServices.getAdminData(uid),
+      future: dashboardTopBarServices.getUserData(uid),
       builder: (context, snapshot) {
         String fullName = "Loading...";
 
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          fullName = snapshot.data!["fullName"] ?? "Admin";
+          fullName = snapshot.data!["fullName"] ?? "User";
         }
 
         return Container(
