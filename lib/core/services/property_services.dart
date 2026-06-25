@@ -26,7 +26,7 @@ class PropertyServicesImpl implements PropertyServices {
     List<PropertyModel> latestProperties = [];
     List<PropertyModel> latestFavorites = [];
 
-    // 🔥 نحدد مسار المفضلة حسب الدور (User أو Admin)
+    //!  نحدد مسار المفضلة حسب الدور (User أو Admin)
     final favoritesPathFuture = authServices.getUserRole(currentUser.uid).then((
       role,
     ) {
@@ -37,7 +37,7 @@ class PropertyServicesImpl implements PropertyServices {
       }
     });
 
-    // 🔥 Stream للعقارات
+    // ! Stream للعقارات
     final propertiesSub = firestoreServices
         .collectionStream<PropertyModel>(
           path: ApiPaths.properties(),
@@ -45,8 +45,6 @@ class PropertyServicesImpl implements PropertyServices {
         )
         .listen((properties) async {
           latestProperties = properties;
-
-          // final favoritesPath = await favoritesPathFuture;
 
           final merged = latestProperties.map((property) {
             final isFav = latestFavorites.any((fav) => fav.id == property.id);
@@ -56,7 +54,7 @@ class PropertyServicesImpl implements PropertyServices {
           controller.add(merged);
         });
 
-    // 🔥 Stream للمفضلة (User أو Admin)
+    //  Stream للمفضلة (User أو Admin)
     favoritesPathFuture.then((favoritesPath) {
       final favoritesSub = firestoreServices
           .collectionStream<PropertyModel>(

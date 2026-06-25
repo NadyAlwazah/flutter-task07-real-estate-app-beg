@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/property_services.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/app_loader.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_card.dart';
 
 class UserPropertyGridSection extends StatefulWidget {
@@ -23,12 +23,7 @@ class _UserPropertyGridSectionState extends State<UserPropertyGridSection> {
         stream: propertyServices.getPropertiesStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CupertinoActivityIndicator(
-                radius: 15,
-                color: AppColors.primary,
-              ),
-            );
+            return const Center(child: AppLoader());
           }
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));

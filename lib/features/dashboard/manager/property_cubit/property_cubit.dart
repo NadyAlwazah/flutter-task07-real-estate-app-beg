@@ -26,7 +26,7 @@ class PropertyCubit extends Cubit<PropertyState> {
     emit(PropertyLoading());
 
     try {
-      // توليد id جديد للعقار
+      //! توليد id جديد للعقار
       final id = FirebaseFirestore.instance.collection('properties').doc().id;
 
       final property = PropertyModel(

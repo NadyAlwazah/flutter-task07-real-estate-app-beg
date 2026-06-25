@@ -7,6 +7,7 @@ import 'package:flutter_task07_real_estate_app_beg/core/services/profile_service
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/app_loader.dart';
 
 class UserProfileViewBody extends StatelessWidget {
   const UserProfileViewBody({super.key, required this.onEditProfile});
@@ -19,12 +20,7 @@ class UserProfileViewBody extends StatelessWidget {
       future: profileServices.fetchUserData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CupertinoActivityIndicator(
-              radius: 15,
-              color: AppColors.primary,
-            ),
-          );
+          return const Center(child: AppLoader());
         }
 
         if (snapshot.hasError) {

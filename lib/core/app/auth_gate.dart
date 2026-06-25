@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/app_loader.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/login_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/dashboard_view.dart';
@@ -15,14 +15,7 @@ class AuthGate extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         if (state is AuthLoading || state is AuthSigningOut) {
-          return const Scaffold(
-            body: Center(
-              child: CupertinoActivityIndicator(
-                radius: 15,
-                color: AppColors.primary,
-              ),
-            ),
-          );
+          return const Scaffold(body: Center(child: AppLoader()));
         }
 
         if (state is AuthLoaded) {

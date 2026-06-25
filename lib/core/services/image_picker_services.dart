@@ -19,9 +19,9 @@ class ImagePickerService {
       );
 
       if (picked == null) return null;
-      return await picked.readAsBytes(); // 👈 نحولها إلى Uint8List
+      return await picked.readAsBytes(); // نحولها إلى Uint8List
     } catch (e) {
-      log("❌ Error picking image: $e");
+      log(" Error picking image: $e");
       return null;
     }
   }
@@ -32,17 +32,16 @@ class ImagePickerService {
     required String bucket,
   }) async {
     try {
-      final storagePath =
-          '${DateTime.now().millisecondsSinceEpoch}.png'; // 👈 اسم فريد للصورة
+      final storagePath = '${DateTime.now().millisecondsSinceEpoch}.png';
 
       final response = await Supabase.instance.client.storage
           .from(bucket)
-          .uploadBinary(storagePath, imageBytes); // 👈 رفع من bytes مباشرة
+          .uploadBinary(storagePath, imageBytes); //  رفع من bytes مباشرة
 
-      log("📤 Upload response: $response");
+      log(" Upload response: $response");
 
       if (response.isEmpty) {
-        log("❌ Upload failed: empty response");
+        log(" Upload failed: empty response");
         return null;
       }
 
@@ -50,10 +49,10 @@ class ImagePickerService {
           .from(bucket)
           .getPublicUrl(storagePath);
 
-      log("✅ Uploaded image URL: $url");
+      log(" Uploaded image URL: $url");
       return url;
     } catch (e) {
-      log("❌ Error uploading image: $e");
+      log(" Error uploading image: $e");
       return null;
     }
   }

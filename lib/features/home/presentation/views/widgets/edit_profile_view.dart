@@ -5,8 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/user_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/edit_profile_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/profile_services.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/app_loader.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/edit_profile_form_fields.dart';
@@ -72,12 +72,7 @@ class _EditProfileViewState extends State<EditProfileView> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CupertinoActivityIndicator(
-                  radius: 15,
-                  color: AppColors.primary,
-                ),
-              );
+              return const Center(child: AppLoader());
             }
 
             if (!snapshot.hasData) {

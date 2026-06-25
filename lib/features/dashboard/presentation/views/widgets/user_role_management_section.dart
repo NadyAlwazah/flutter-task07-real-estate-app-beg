@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/auth_services.dart';
-import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/widgets/app_loader.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/role_management_card.dart';
 
 class UserRoleManagementSection extends StatefulWidget {
@@ -36,12 +36,7 @@ class _UserRoleManagementSectionState extends State<UserRoleManagementSection> {
       future: _future,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(
-            child: CupertinoActivityIndicator(
-              radius: 15,
-              color: AppColors.primary,
-            ),
-          );
+          return const Center(child: AppLoader());
         }
 
         final accounts = snapshot.data!;
