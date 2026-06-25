@@ -73,9 +73,17 @@ class _SidebarSectionState extends State<SidebarSection> {
               },
               child: ListTile(
                 leading: Icon(size: 20.r, Icons.logout, color: Colors.red),
-                title: Text(
-                  'Log Out',
-                  style: Styles.textStyle12W600.copyWith(color: Colors.red),
+                title: LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth < 20) {
+                      return const SizedBox.shrink();
+                    }
+
+                    return Text(
+                      'Log Out',
+                      style: Styles.textStyle12W600.copyWith(color: Colors.red),
+                    );
+                  },
                 ),
                 onTap: () async {
                   context.read<AuthCubit>().signOut();
@@ -93,9 +101,14 @@ class _SidebarSectionState extends State<SidebarSection> {
       children: [
         Image.asset(AssetsData.logo, width: 30.w, height: 30.h),
         const SizedBox(width: 8),
-        Text(
-          'PropWise',
-          style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+        Flexible(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'PropWise',
+              style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
       ],
     );
