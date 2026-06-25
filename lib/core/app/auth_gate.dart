@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/layout/adaptive_layout.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/layout/responsive_layout.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/app_loader.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/presentation/views/login_view.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/user_home_view.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
@@ -19,15 +18,13 @@ class AuthGate extends StatelessWidget {
         }
 
         if (state is AuthLoaded) {
-          return state.role == 'user'
-              ? const UserHomeView()
-              : const DashboardView();
+          return ResponsiveLayout(role: state.role);
         }
 
         if (state is AuthInitial ||
             state is AuthSignedOut ||
             state is AuthSignOutError) {
-          return const LoginView();
+          return const AdaptiveLayout(wideScreenView: LoginView());
         }
 
         if (state is AuthError) {
