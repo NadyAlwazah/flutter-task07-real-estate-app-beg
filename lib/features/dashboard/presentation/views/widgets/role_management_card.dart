@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'role_dropdown.dart';
 
 class RoleManagementCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class RoleManagementCard extends StatelessWidget {
     super.key,
     required this.user,
     required this.onUpdate,
-    required this.onDelete, // 👈 إضافة
+    required this.onDelete,
     required this.onRefresh,
   });
 
@@ -54,10 +55,7 @@ class RoleManagementCard extends StatelessWidget {
                 children: [
                   Text(
                     user["fullName"].toString(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12.sp,
-                    ),
+                    style: Styles.textStyle12W600,
                   ),
                   SizedBox(height: 4.h),
                   Text(
@@ -71,7 +69,7 @@ class RoleManagementCard extends StatelessWidget {
               ),
             ),
 
-            // 🔥 Dropdown
+            //! Dropdown
             RoleDropdown(
               currentRole: user["role"],
               email: user["email"],
@@ -82,7 +80,6 @@ class RoleManagementCard extends StatelessWidget {
 
             SizedBox(width: 10.w),
 
-            //  زر الحذف
             IconButton(
               icon: Icon(Icons.delete, color: Colors.red, size: 20.sp),
               onPressed: () {
@@ -95,7 +92,6 @@ class RoleManagementCard extends StatelessWidget {
     );
   }
 
-  //
   void _showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,

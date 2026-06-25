@@ -29,7 +29,6 @@ class AddPropertyFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 🏠 الصف الأول
         Row(
           children: [
             Expanded(
@@ -51,7 +50,6 @@ class AddPropertyFormFields extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // 📍 الصف الثاني
         Row(
           children: [
             Expanded(
@@ -74,7 +72,6 @@ class AddPropertyFormFields extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // 🛏 الصف الثالث
         Row(
           children: [
             Expanded(
@@ -98,7 +95,6 @@ class AddPropertyFormFields extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // 📐 الصف الرابع
         CustomTextField(
           controller: areaController,
           label: "Area (sq ft)",
@@ -107,7 +103,6 @@ class AddPropertyFormFields extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // 📝 الوصف في سطر منفصل
         CustomTextField(
           controller: descriptionController,
           label: "Description",

@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/image_picker_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/manager/property_cubit/property_cubit.dart';
@@ -40,7 +42,6 @@ class _UpdatePropertyBottomSheetState extends State<UpdatePropertyBottomSheet> {
   void initState() {
     super.initState();
 
-    // تعبئة الحقول بالقيم القديمة
     titleController = TextEditingController(text: widget.property.title);
     typeController = TextEditingController(text: widget.property.type);
     locationController = TextEditingController(text: widget.property.location);
@@ -86,7 +87,7 @@ class _UpdatePropertyBottomSheetState extends State<UpdatePropertyBottomSheet> {
 
     String imageUrl = widget.property.imageUrl;
 
-    // إذا اختار صورة جديدة → نرفعها
+    //! إذا اختار صورة جديدة نرفعها
     if (webImage != null) {
       final uploadedUrl = await imageService.uploadImageBytes(
         imageBytes: webImage!,
@@ -133,7 +134,7 @@ class _UpdatePropertyBottomSheetState extends State<UpdatePropertyBottomSheet> {
       padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
       ),
       child: SingleChildScrollView(
         child: Form(
@@ -141,14 +142,7 @@ class _UpdatePropertyBottomSheetState extends State<UpdatePropertyBottomSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Update Property",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF333333),
-                ),
-              ),
+              Text("Update Property", style: Styles.textStyle22Bold),
               const SizedBox(height: 20),
 
               AddPropertyImagePicker(

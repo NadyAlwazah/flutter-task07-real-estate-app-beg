@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/manager/property_favorite_cubit/property_favorite_cubit.dart';
 
 class UserPropertyCard extends StatelessWidget {
@@ -86,7 +87,7 @@ class UserPropertyCard extends StatelessWidget {
                                         child: Icon(
                                           Icons.favorite,
                                           color: Colors.red,
-                                          size: 20.sp,
+                                          size: 20.r,
                                         ),
                                       )
                                     : GestureDetector(
@@ -96,7 +97,7 @@ class UserPropertyCard extends StatelessWidget {
                                         child: Icon(
                                           Icons.favorite_border,
                                           color: AppColors.primary,
-                                          size: 20.sp,
+                                          size: 20.r,
                                         ),
                                       );
                               }
@@ -107,18 +108,18 @@ class UserPropertyCard extends StatelessWidget {
                                     ? Icon(
                                         Icons.favorite,
                                         color: Colors.red,
-                                        size: 20.sp,
+                                        size: 20.r,
                                       )
                                     : propertyModel.isFavorite
                                     ? Icon(
                                         Icons.favorite,
                                         color: Colors.red,
-                                        size: 20.sp,
+                                        size: 20.r,
                                       )
                                     : Icon(
                                         Icons.favorite_border,
                                         color: AppColors.primary,
-                                        size: 20.sp,
+                                        size: 20.r,
                                       ),
                               );
                             },
@@ -142,11 +143,7 @@ class UserPropertyCard extends StatelessWidget {
                   SizedBox(height: 8.h),
                   Text(
                     "\$${propertyModel.price}",
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13.sp,
-                    ),
+                    style: Styles.textStyle13Bold,
                   ),
                 ],
               ),

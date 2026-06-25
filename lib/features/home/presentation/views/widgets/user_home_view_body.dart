@@ -3,9 +3,9 @@ import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.da
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/edit_profile_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/favority_properties.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/home_top_bar.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/property_details_view.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/property_details_view_body.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/sidebar_user_section.dart';
-import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_profile_view.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_profile_view_body.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_property_grid_section.dart';
 
 class UserHomeViewBody extends StatefulWidget {
@@ -36,7 +36,7 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const HomeTopBar(),
-              // const SizedBox(height: 20),
+
               Expanded(
                 child: IndexedStack(
                   index: selectedIndex,
@@ -49,7 +49,7 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
                               });
                             },
                           )
-                        : PropertyDetailsView(
+                        : PropertyDetailsViewBody(
                             property: selectedProperty!,
                             onBack: () {
                               setState(() {
@@ -68,7 +68,7 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
                               });
                             },
                           )
-                        : UserProfileView(
+                        : UserProfileViewBody(
                             onEditProfile: () {
                               setState(() => showEditProfile = true);
                             },

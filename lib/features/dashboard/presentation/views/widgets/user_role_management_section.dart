@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/auth_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/role_management_card.dart';
 
 class UserRoleManagementSection extends StatefulWidget {
@@ -46,39 +46,27 @@ class _UserRoleManagementSectionState extends State<UserRoleManagementSection> {
 
         final accounts = snapshot.data!;
 
-        //  فصل الـ users عن الـ admins
+        //!  فصل الـ users عن الـ admins
         final users = accounts.where((e) => e["role"] == "user").toList();
         final admins = accounts.where((e) => e["role"] == "admin").toList();
 
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ---------------- USERS SECTION ----------------
+            //! USERS SECTION
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Text(
-                      "Users",
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ),
+                  Center(child: Text("Users", style: Styles.textStyle20Bold)),
                   const SizedBox(height: 16),
 
                   Expanded(
                     child: users.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
                               "No users found",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                              ),
+                              style: Styles.textStyle16Grey,
                             ),
                           )
                         : ListView.builder(
@@ -101,7 +89,7 @@ class _UserRoleManagementSectionState extends State<UserRoleManagementSection> {
 
             const SizedBox(width: 24),
 
-            // ---------------- ADMINS SECTION ----------------
+            //! ADMINS SECTION
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,24 +97,17 @@ class _UserRoleManagementSectionState extends State<UserRoleManagementSection> {
                   Center(
                     child: Text(
                       "Admins",
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.redAccent,
-                      ),
+                      style: Styles.textStyle20Bold.copyWith(color: Colors.red),
                     ),
                   ),
                   const SizedBox(height: 16),
 
                   Expanded(
                     child: admins.isEmpty
-                        ? const Center(
+                        ? Center(
                             child: Text(
                               "No admins found",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey,
-                              ),
+                              style: Styles.textStyle16Grey,
                             ),
                           )
                         : ListView.builder(

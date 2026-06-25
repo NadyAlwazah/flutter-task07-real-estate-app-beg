@@ -33,7 +33,7 @@ class SidebarItem extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: 18.sp,
+                size: 19.r,
                 color: isActive ? Colors.white : Colors.grey[700],
               ),
               SizedBox(width: 12.w),

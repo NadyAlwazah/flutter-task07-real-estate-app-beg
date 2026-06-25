@@ -10,7 +10,7 @@ class AppAvatar extends StatelessWidget {
     return CircleAvatar(
       radius: 37.5.r,
       backgroundColor: Colors.white,
-      child: Icon(Icons.person, size: 40.sp, color: AppColors.primary),
+      child: Icon(Icons.person, size: 40.r, color: AppColors.primary),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/manager/property_favorite_cubit/property_favorite_cubit.dart';
 
 class PropertyCard extends StatelessWidget {
@@ -109,7 +110,7 @@ class PropertyCard extends StatelessWidget {
                 SizedBox(height: 8.h),
                 Row(
                   children: [
-                    Icon(Icons.bed_rounded, size: 16.sp, color: Colors.black87),
+                    Icon(Icons.bed_rounded, size: 17.r, color: Colors.black87),
                     SizedBox(width: 4.w),
                     Text(
                       '${propertyModel.beds}',
@@ -118,7 +119,7 @@ class PropertyCard extends StatelessWidget {
                     SizedBox(width: 10.w),
                     Icon(
                       Icons.bathtub_outlined,
-                      size: 16.sp,
+                      size: 17.r,
                       color: Colors.black54,
                     ),
                     SizedBox(width: 4.w),
@@ -129,7 +130,7 @@ class PropertyCard extends StatelessWidget {
                     SizedBox(width: 10.w),
                     Icon(
                       Icons.fullscreen_rounded,
-                      size: 16.sp,
+                      size: 17.r,
                       color: Colors.black54,
                     ),
                     SizedBox(width: 4.w),
@@ -141,11 +142,7 @@ class PropertyCard extends StatelessWidget {
                   children: [
                     Text(
                       "\$${propertyModel.price}",
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13.sp,
-                      ),
+                      style: Styles.textStyle13Bold,
                     ),
                     const Spacer(),
 
@@ -168,7 +165,7 @@ class PropertyCard extends StatelessWidget {
                                   child: Icon(
                                     Icons.favorite,
                                     color: Colors.red,
-                                    size: 20.sp,
+                                    size: 20.r,
                                   ),
                                 )
                               : GestureDetector(
@@ -177,7 +174,7 @@ class PropertyCard extends StatelessWidget {
                                   child: Icon(
                                     Icons.favorite_border,
                                     color: AppColors.primary,
-                                    size: 20.sp,
+                                    size: 20.r,
                                   ),
                                 );
                         }
@@ -188,18 +185,18 @@ class PropertyCard extends StatelessWidget {
                               ? Icon(
                                   Icons.favorite,
                                   color: Colors.red,
-                                  size: 20.sp,
+                                  size: 20.r,
                                 )
                               : propertyModel.isFavorite
                               ? Icon(
                                   Icons.favorite,
                                   color: Colors.red,
-                                  size: 20.sp,
+                                  size: 20.r,
                                 )
                               : Icon(
                                   Icons.favorite_border,
                                   color: AppColors.primary,
-                                  size: 20.sp,
+                                  size: 20.r,
                                 ),
                         );
                       },

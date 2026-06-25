@@ -130,7 +130,6 @@ class _DashboardHeaderState extends State<DashboardHeader> {
     String? selectedValue,
     ValueChanged<String?> onChanged,
   ) {
-    // أيقونات لكل dropdown
     final icons = {
       'Location': Icons.location_on_outlined,
       'Price': Icons.attach_money,

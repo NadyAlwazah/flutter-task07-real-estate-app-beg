@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/image_picker_services.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/manager/property_cubit/property_cubit.dart';
@@ -64,8 +65,6 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
 
     setState(() => isUploading = true);
 
-    // 👇 هنا ترفع الصورة مباشرة إلى التخزين (Firebase/Supabase)
-
     final imageUrl = await imageService.uploadImageBytes(
       imageBytes: webImage!,
       bucket: "properties",
@@ -116,14 +115,7 @@ class _AddPropertyBottomSheetState extends State<AddPropertyBottomSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Add New Property",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF333333),
-                ),
-              ),
+              Text("Add New Property", style: Styles.textStyle22Bold),
               const SizedBox(height: 20),
 
               AddPropertyImagePicker(webImage: webImage, onTap: _pickImage),

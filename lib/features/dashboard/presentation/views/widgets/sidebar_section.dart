@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/auth/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/dashboard/presentation/views/widgets/sidebar_item.dart';
@@ -71,14 +72,10 @@ class _SidebarSectionState extends State<SidebarSection> {
                 }
               },
               child: ListTile(
-                leading: Icon(size: 20.sp, Icons.logout, color: Colors.red),
+                leading: Icon(size: 20.r, Icons.logout, color: Colors.red),
                 title: Text(
                   'Log Out',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.red,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Styles.textStyle12W600.copyWith(color: Colors.red),
                 ),
                 onTap: () async {
                   context.read<AuthCubit>().signOut();

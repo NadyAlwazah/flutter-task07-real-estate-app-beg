@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/user_home_view_body.dart';
 
 class UserHomeView extends StatelessWidget {
@@ -7,7 +8,7 @@ class UserHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color(0xFFE8E8E8),
+      backgroundColor: AppColors.background,
       body: UserHomeViewBody(),
     );
   }

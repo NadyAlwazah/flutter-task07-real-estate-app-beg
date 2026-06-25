@@ -6,9 +6,10 @@ import 'package:flutter_task07_real_estate_app_beg/core/models/user_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/profile_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 
-class UserProfileView extends StatelessWidget {
-  const UserProfileView({super.key, required this.onEditProfile});
+class UserProfileViewBody extends StatelessWidget {
+  const UserProfileViewBody({super.key, required this.onEditProfile});
   final VoidCallback onEditProfile;
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class UserProfileView extends StatelessWidget {
 
               Text(
                 email,
-                style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
+                style: Styles.textStyle14Grey.copyWith(color: Colors.grey[600]),
               ),
               SizedBox(height: 10.h),
 
@@ -75,16 +76,10 @@ class UserProfileView extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.phone, color: AppColors.primary, size: 18.sp),
+                    Icon(Icons.phone, color: AppColors.primary, size: 19.r),
 
                     SizedBox(width: 6.w),
-                    Text(
-                      phone,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.grey[700],
-                      ),
-                    ),
+                    Text(phone, style: Styles.textStyle14Grey),
                   ],
                 ),
               SizedBox(height: 10.h),
@@ -96,17 +91,11 @@ class UserProfileView extends StatelessWidget {
                     Icon(
                       Icons.location_on,
                       color: AppColors.primary,
-                      size: 18.sp,
+                      size: 19.r,
                     ),
 
                     SizedBox(width: 6.w),
-                    Text(
-                      location,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.grey[700],
-                      ),
-                    ),
+                    Text(location, style: Styles.textStyle14Grey),
                   ],
                 ),
 

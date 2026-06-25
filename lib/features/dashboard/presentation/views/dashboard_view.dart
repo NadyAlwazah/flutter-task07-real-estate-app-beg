@@ -35,7 +35,7 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8E8E8),
+      backgroundColor: AppColors.background,
       body: BlocProvider(
         create: (context) => PropertyFavoriteCubit(),
         child: DashboardViewBody(

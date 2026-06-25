@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/utils/styles.dart';
 
-class PropertyDetailsView extends StatelessWidget {
+class PropertyDetailsViewBody extends StatelessWidget {
   final PropertyModel property;
   final VoidCallback onBack;
-  const PropertyDetailsView({
+  const PropertyDetailsViewBody({
     super.key,
     required this.property,
     required this.onBack,
@@ -17,7 +18,7 @@ class PropertyDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      color: const Color(0xFFE8E8E8),
+      color: AppColors.background,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,18 +58,14 @@ class PropertyDetailsView extends StatelessWidget {
                   Expanded(
                     child: Text(
                       property.title,
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
+                      style: Styles.textStyle24Bold.copyWith(
                         color: Colors.black87,
                       ),
                     ),
                   ),
                   Text(
                     "\$${property.price}",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
+                    style: Styles.textStyle24Bold.copyWith(
                       color: AppColors.primary,
                     ),
                   ),
@@ -82,11 +79,7 @@ class PropertyDetailsView extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.location_on,
-                    color: AppColors.primary,
-                    size: 20.sp,
-                  ),
+                  Icon(Icons.location_on, color: AppColors.primary, size: 20.r),
                   SizedBox(width: 6.w),
                   Text(
                     property.location,
@@ -200,7 +193,7 @@ class PropertyDetailsView extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(icon, size: 22.sp, color: AppColors.primary),
+          Icon(icon, size: 22.r, color: AppColors.primary),
           SizedBox(width: 8.w),
           Text(
             text,

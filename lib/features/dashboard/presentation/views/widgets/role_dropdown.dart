@@ -39,7 +39,7 @@ class RoleDropdown extends StatelessWidget {
             Icon(
               currentRole == "admin" ? Icons.shield : Icons.person,
               color: AppColors.primary,
-              size: 20.sp,
+              size: 20.r,
             ),
             const SizedBox(width: 6),
             DropdownButton<String>(
