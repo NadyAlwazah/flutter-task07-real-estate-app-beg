@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/models/property_model.dart';
+import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/edit_profile_view.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/favority_properties.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/home_top_bar.dart';
 import 'package:flutter_task07_real_estate_app_beg/features/home/presentation/views/widgets/property_details_view.dart';
@@ -17,7 +18,7 @@ class UserHomeViewBody extends StatefulWidget {
 class _UserHomeViewBodyState extends State<UserHomeViewBody> {
   int selectedIndex = 0;
   PropertyModel? selectedProperty;
-
+  bool showEditProfile = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -52,14 +53,24 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
                             property: selectedProperty!,
                             onBack: () {
                               setState(() {
-                                selectedProperty = null; // نرجع للـ Grid
+                                selectedProperty = null;
                               });
                             },
                           ),
 
                     const FavorityProperties(),
 
-                    UserProfileView(),
+                    showEditProfile
+                        ? EditProfileView(
+                            onSaved: () {
+                              setState(() => showEditProfile = false);
+                            },
+                          )
+                        : UserProfileView(
+                            onEditProfile: () {
+                              setState(() => showEditProfile = true);
+                            },
+                          ),
                     const Center(child: Text("Help Center")),
 
                     const Center(child: Text("Settings")),

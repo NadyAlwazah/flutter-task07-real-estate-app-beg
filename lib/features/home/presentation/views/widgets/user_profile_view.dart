@@ -8,8 +8,8 @@ import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/utils/assets.dart';
 
 class UserProfileView extends StatelessWidget {
-  const UserProfileView({super.key});
-
+  const UserProfileView({super.key, required this.onEditProfile});
+  final VoidCallback onEditProfile;
   @override
   Widget build(BuildContext context) {
     final profileServices = ProfileServicesImp.instance;
@@ -91,7 +91,7 @@ class UserProfileView extends StatelessWidget {
                 icon: Icons.edit,
                 title: "Edit Profile",
                 color: AppColors.primary,
-                onTap: () {},
+                onTap: onEditProfile,
               ),
 
               _settingsCard(
