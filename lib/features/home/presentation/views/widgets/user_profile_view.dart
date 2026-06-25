@@ -37,6 +37,7 @@ class UserProfileView extends StatelessWidget {
         final user = snapshot.data!;
         final name = user.fullName;
         final email = user.email;
+        final location = user.location ?? "Not found";
         final phone = user.phoneNumber ?? "Not found";
 
         return Padding(
@@ -72,11 +73,35 @@ class UserProfileView extends StatelessWidget {
 
               if (phone.isNotEmpty)
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.phone, color: AppColors.primary, size: 18.sp),
+
                     SizedBox(width: 6.w),
                     Text(
                       phone,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                  ],
+                ),
+              SizedBox(height: 10.h),
+
+              if (location.isNotEmpty)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      color: AppColors.primary,
+                      size: 18.sp,
+                    ),
+
+                    SizedBox(width: 6.w),
+                    Text(
+                      location,
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.grey[700],

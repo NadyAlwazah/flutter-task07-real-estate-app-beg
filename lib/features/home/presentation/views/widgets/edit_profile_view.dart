@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_task07_real_estate_app_beg/core/models/user_model.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/edit_profile_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/services/profile_services.dart';
 import 'package:flutter_task07_real_estate_app_beg/core/theme/app_colors.dart';
@@ -23,7 +24,10 @@ class _EditProfileViewState extends State<EditProfileView> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+
+  final TextEditingController locationController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+
   final editProfileServices = EditProfileServicesImp.instance;
   final profileServices = ProfileServicesImp.instance;
 
@@ -32,6 +36,7 @@ class _EditProfileViewState extends State<EditProfileView> {
       await editProfileServices.updateUserData(
         firstName: firstNameController.text.trim(),
         lastName: lastNameController.text.trim(),
+        location: locationController.text.trim(),
         phoneNumber: phoneNumberController.text.trim(),
         email: emailController.text.trim(),
       );
@@ -48,6 +53,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
+    locationController.dispose();
     phoneNumberController.dispose();
     emailController.dispose();
     super.dispose();
@@ -56,9 +62,9 @@ class _EditProfileViewState extends State<EditProfileView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SingleChildScrollView(
-        child: FutureBuilder(
+        child: FutureBuilder<UserModel>(
           future: profileServices.fetchUserData(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
@@ -82,6 +88,7 @@ class _EditProfileViewState extends State<EditProfileView> {
 
             firstNameController.text = user.firstName ?? '';
             lastNameController.text = user.lastName ?? '';
+            locationController.text = user.location ?? '';
             phoneNumberController.text = user.phoneNumber ?? '';
             emailController.text = user.email;
 
@@ -103,7 +110,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   EditProfileFormFields(
                     firstNameController: firstNameController,
                     lastNameController: lastNameController,
-
+                    locationController: locationController,
                     phoneNumberController: phoneNumberController,
                     emailController: emailController,
                   ),

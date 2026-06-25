@@ -14,7 +14,7 @@ class FavorityProperties extends StatelessWidget {
     final favoriteServices = FavoriteServicesImp.instance;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       child: StreamBuilder<List<PropertyModel>>(
         stream: favoriteServices.getFavoritePropertiesUserStream(),
 

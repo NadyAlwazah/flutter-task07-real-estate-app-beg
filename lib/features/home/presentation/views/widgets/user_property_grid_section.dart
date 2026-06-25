@@ -18,7 +18,7 @@ class _UserPropertyGridSectionState extends State<UserPropertyGridSection> {
   Widget build(BuildContext context) {
     final propertyServices = PropertyServicesImpl.instance;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       child: StreamBuilder<List<PropertyModel>>(
         stream: propertyServices.getPropertiesStream(),
         builder: (context, snapshot) {

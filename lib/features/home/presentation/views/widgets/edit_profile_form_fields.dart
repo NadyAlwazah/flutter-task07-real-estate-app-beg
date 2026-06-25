@@ -11,11 +11,13 @@ class EditProfileFormFields extends StatelessWidget {
     required this.lastNameController,
     required this.phoneNumberController,
     required this.emailController,
+    required this.locationController,
   });
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
   final TextEditingController phoneNumberController;
 
+  final TextEditingController locationController;
   final TextEditingController emailController;
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,15 @@ class EditProfileFormFields extends StatelessWidget {
           textInputType: TextInputType.emailAddress,
 
           hintText: "Enter your email",
+        ),
+        const SizedBox(height: 16),
+        const FormLabel(text: "Location"),
+        const SizedBox(height: 8),
+        CustomTextFormFieldProfile(
+          controller: locationController,
+          textInputType: TextInputType.text,
+
+          hintText: "Enter your location",
         ),
         const SizedBox(height: 16),
 
