@@ -12,8 +12,8 @@ class HomeTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final profileServices = ProfileServicesImp.instance;
 
-    return FutureBuilder<UserModel>(
-      future: profileServices.fetchUserData(),
+    return StreamBuilder<UserModel>(
+      stream: profileServices.fetchUserDataStream(),
       builder: (context, snapshot) {
         String fullName = "Loading...";
 

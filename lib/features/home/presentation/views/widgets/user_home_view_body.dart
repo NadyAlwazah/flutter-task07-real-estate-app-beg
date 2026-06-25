@@ -63,7 +63,9 @@ class _UserHomeViewBodyState extends State<UserHomeViewBody> {
                     showEditProfile
                         ? EditProfileView(
                             onSaved: () {
-                              setState(() => showEditProfile = false);
+                              setState(() {
+                                showEditProfile = false;
+                              });
                             },
                           )
                         : UserProfileView(
