@@ -88,21 +88,7 @@ The Admin Dashboard UI may look similar to these examples (for inspiration only 
 - Cubit states typically include: `AuthInitial`, `AuthLoading`, `AuthAuthenticated`, `AuthUnauthenticated`, `AuthError`.
 - A setup video/reference is available showing how to integrate Cubit with Firebase Authentication in this project.
 
----
 
-## Reference Video
-- 📹 A video walkthrough covering **all the app screens/UI** (Register, Login, Home, Details, Admin Dashboard, etc.) is included locally in the project's `assets` folder.
-- **Path:** `assets/videos/app_walkthrough.mp4`
-- *(Adjust the file name/path above to match the actual file you place in the `assets` folder.)*
-- Note: for Flutter, remember to register the assets path in `pubspec.yaml`:
-  ```yaml
-  flutter:
-    assets:
-      - assets/videos/
-      - assets/images/
-  ```
-
----
 
 ## Notes
 - Responsive design is required: Admin Dashboard is desktop/tablet-only (≥600px); mobile users get a simplified/alternate experience.
