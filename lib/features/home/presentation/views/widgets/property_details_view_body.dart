@@ -102,6 +102,7 @@ class PropertyDetailsViewBody extends StatelessWidget {
                     "${property.baths} Baths",
                   ),
                   _featureCard(Icons.fullscreen, property.area),
+                  _featureCard(Icons.type_specimen_rounded, property.type),
                 ],
               ),
             ),
