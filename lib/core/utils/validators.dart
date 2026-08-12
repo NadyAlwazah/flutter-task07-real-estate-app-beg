@@ -13,7 +13,7 @@ class Validators {
     if (value == null || value.isEmpty) {
       return "Email is required";
     }
-    if (!value.contains("@")) {
+    if (!value.contains("@gmail.com")) {
       return "Enter a valid email";
     }
     return null;

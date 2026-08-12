@@ -6,14 +6,14 @@ class ApiPaths {
   static String properties([String? propertyId]) =>
       propertyId != null ? "properties/$propertyId" : "properties";
 
-  // ⭐ مفضلة المستخدم
+  //  مفضلة المستخدم
   static String favoritePropertiesUser(String userId) =>
       "users/$userId/favorites";
 
   static String favoritePropertyUser(String userId, String propertyId) =>
       "users/$userId/favorites/$propertyId";
 
-  // ⭐ مفضلة الأدمن
+  //  مفضلة الأدمن
   static String favoritePropertiesAdmin(String adminId) =>
       "admins/$adminId/favorites";
 
